@@ -1,0 +1,32 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	float x=0;
+	printf("Enter an three numbers: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f",&x);
+	if (x>0) printf("%f is positive.",x);
+	else if (x<0) printf("%f is negative.",x);
+	else printf("You entered Zero");
+	return 0;
+}

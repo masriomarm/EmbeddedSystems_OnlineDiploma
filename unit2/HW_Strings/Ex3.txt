@@ -1,0 +1,28 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 14, 2021
+ *      Author: Omar Elmasri
+ */
+
+#include <stdio.h>
+#include "ArrFnc.h"
+#include "string.h"
+
+int main()
+{
+	char str[100];
+
+	printf("Enter the string :");
+	fflush(stdin); fflush(stdout);
+	gets(str);
+
+	int i=0;
+	int length=strlen(str);
+	printf("Reverse string is : ");
+	for (;i<=length;i++)
+	{
+		printf("%c",str[length-i]);
+	}
+return 0;
+}

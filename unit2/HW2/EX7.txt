@@ -1,0 +1,43 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	int x=0,fact=1;
+	int i=1;
+	printf("Enter a number: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%d",&x);
+	if (x > 0)
+	{
+		for (i=1;i<=x;i++)
+			fact=fact*i;
+		printf("factorial= %d", fact);
+	}
+	else if (x == 0)
+	{
+		fact =1;
+		printf("factorial= %d", fact);
+	}
+	else
+		printf("ERROR!!! Factorial of negative numbers doesn't exist.");
+	return 0;
+}

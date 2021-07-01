@@ -1,0 +1,56 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 14, 2021
+ *      Author: Omar Elmasri
+ */
+
+#include <stdio.h>
+#include "ArrFnc.h"
+
+int main()
+{
+	int a[10][10], aTrns[10][10];
+	int rows=0; int cols=0; int i,j;
+
+	printf("Enter rows and columns of matrix: ");
+	fflush(stdin);	fflush(stdout);
+	scanf("%d %d",&rows,&cols);
+
+	printf("Enter elements of matrix: \n");
+
+		for (i=0;i<rows;i++)
+			{
+				for(j=0;j<cols;j++)
+					{
+					printf("Enter elements a%d%d: ",i+1,j+1);
+					fflush(stdin);	fflush(stdout);
+					scanf("%d",&a[i][j]);
+					aTrns[j][i]=a[i][j];
+					}
+			}
+	printf("Entered matrix: \n");
+
+		for (i=0;i<rows;i++)
+			{
+				for(j=0;j<cols;j++)
+				{
+				printf("%d\t",a[i][j]);
+				}
+			printf("\n");
+			}
+
+		printf("Transpose of matrix: \n");
+
+		for (i=0;i<cols;i++)
+			{
+				for(j=0;j<rows;j++)
+				{
+				printf("%d\t",aTrns[i][j]);
+				}
+			printf("\n");
+			}
+
+	return 0;
+}
+

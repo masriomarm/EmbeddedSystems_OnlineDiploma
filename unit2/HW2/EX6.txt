@@ -1,0 +1,31 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	int x=0,sum=0;
+	printf("Enter a number: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%d",&x);
+	sum=x*(x+1)/2;
+	printf("sum = %d", sum);
+	return 0;
+}

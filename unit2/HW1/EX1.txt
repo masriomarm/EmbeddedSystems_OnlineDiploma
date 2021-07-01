@@ -1,0 +1,25 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	puts("C Programming");
+	return 0;
+}

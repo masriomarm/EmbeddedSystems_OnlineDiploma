@@ -1,0 +1,32 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	float x=0,y=0,z=0;
+	printf("Enter an three numbers: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f%f%f",&x,&y,&z);
+	if (x>y && x>z) printf("Largest number = %f",x);
+	else if (y>z && y>x) printf("Largest number = %f",y);
+	else printf("Largest number = %f",z);
+	return 0;
+}

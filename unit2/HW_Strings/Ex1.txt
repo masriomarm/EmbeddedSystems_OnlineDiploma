@@ -1,0 +1,31 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 14, 2021
+ *      Author: Omar Elmasri
+ */
+
+#include <stdio.h>
+#include "ArrFnc.h"
+#include "string.h"
+
+int main()
+{
+	char str[100]; char a;
+
+	printf("Enter a string : ");
+	fflush(stdin);fflush(stdout);
+	gets(str);
+
+	printf("Enter a character to find frequency: ");
+	fflush(stdin);fflush(stdout);
+	scanf("%c",&a);
+
+	int i=0,count=0;
+	for (;i<=strlen(str);i++)
+	{
+		if(str[i]==a) ++count;
+	}
+	printf("Frequency of %c = %d",a,count);
+return 0;
+}

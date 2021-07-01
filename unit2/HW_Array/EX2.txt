@@ -1,0 +1,33 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 14, 2021
+ *      Author: Omar Elmasri
+ */
+
+#include <stdio.h>
+#include "ArrFnc.h"
+
+int main()
+{
+	int n,i;
+	float a[50],sum=0,avg=0;
+
+	printf("Enter the number of data: ");
+	fflush(stdin);fflush(stdout);
+	scanf("%d",&n);
+
+	for (i=0;i<n;i++)
+	{
+		printf("%d. Enter number: ",i+1);
+		fflush(stdin);fflush(stdout);
+		scanf("%f",&a[i]);
+		sum+=a[i];
+	}
+
+	avg = sum/n;
+	printf("Average = %f",avg);
+
+	return 0;
+}
+

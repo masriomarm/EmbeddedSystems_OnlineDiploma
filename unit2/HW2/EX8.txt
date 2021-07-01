@@ -1,0 +1,45 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	int x=0,y=0;
+	char operator=0;
+
+	printf("Enter an operator either + - * / : ");
+	fflush(stdin);fflush(stdout);
+	scanf("%c",&operator);
+	printf("Enter two operands: ");
+	fflush(stdin);fflush(stdout);
+	scanf("%d%d",&x,&y);
+
+	switch (operator)
+	{
+		case '+':printf("%d %c %d = %d",x,operator,y,x+y);
+					break;
+		case '-':printf("%d %c %d = %d",x,operator,y,x-y);
+					break;
+		case '*':printf("%d %c %d = %d",x,operator,y,x*y);
+					break;
+		case '/':printf("%d %c %d = %d",x,operator,y,x/y);
+					break;
+	}
+return 0;
+}

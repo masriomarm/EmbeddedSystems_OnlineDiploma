@@ -1,0 +1,35 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 4, 2021
+ *      Author: User
+ */
+
+
+/*
+ ============================================================================
+ Name        : Unit2_Assigenments.c
+ Author      : Omar Hady
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	float a=0,b=0;
+	printf("Enter value of a: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f",&a);
+	printf("Enter value of b: ");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f",&b);
+	printf("After swapping, value of a= %f\n",b);
+	printf("After swapping, value of b= %f\n",a);
+	return 0;
+}

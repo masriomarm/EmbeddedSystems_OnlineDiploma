@@ -1,0 +1,24 @@
+void PrimesInInterval(char arr[], int min, int max)
+{
+	int sqr;
+		int i,j,pricount=0;
+		for (i=min+1;i<max;i++)
+		{
+			sqr=sqrt(i);
+			for(j=1;j<=sqr;j++)
+			{
+				if((i%j == 0) && j!=1) break;
+				else if(j==sqr)
+				{
+					arr[pricount]=i;
+					pricount++;
+				}
+			}
+		}
+
+		printf("Prime numbers between %d and %d are : ",min,max);
+		for(i=0;i<pricount;i++)
+		{
+			printf("\t%d",arr[i]);
+		}
+}
