@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void reversestr(char cols, char arr[cols]);
+
+int main(void)
+{
+	char arr[100]; char cols;
+	printf("Enter a sentence: ");
+	fflush(stdin); fflush(stdout);
+	gets(arr);
+	cols=strlen(arr);
+	reversestr(cols,arr);
+
+	return 0;
+}
+void reversestr(char cols, char arr[cols])
+{
+	if (cols>0)
+	{
+		printf("%c",arr[cols-1]);
+		reversestr(--cols,arr);
+	}
+}
