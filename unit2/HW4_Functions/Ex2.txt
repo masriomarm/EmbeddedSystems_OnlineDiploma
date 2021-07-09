@@ -1,5 +1,28 @@
+/*
+ *
+ *  Created on: July 9, 2021
+ *      Author: Omar Elmasri
+ */
+
+#include <stdio.h>
+#include <math.h>
+
 int fact(int n)
 {
 	if(n>=1)	return n*fact(n-1);
 	else 		return 1;
+}
+
+int main()
+{
+	int n,factorial=1;
+	printf("Enter number to calc factorial: ");
+		fflush(stdin);	fflush(stdout);
+		scanf("%d",&n);
+
+	factorial=fact(n);
+	printf("%d",factorial);
+
+	return 0;
+
 }

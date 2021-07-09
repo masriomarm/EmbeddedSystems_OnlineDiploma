@@ -1,35 +1,36 @@
 /*
- * main.c
  *
- *  Created on: Jun 14, 2021
+ *  Created on: July 9, 2021
  *      Author: Omar Elmasri
  */
 
 #include <stdio.h>
-#include "ArrFnc.h"
-#include <string.h>
 #include <math.h>
 
-int fact(int n);
 
-int main()
+int pwrfnc(int pwr, int base)
+
 {
-	int factorial;
-	int n;
+	 int val=base;
 
-	printf("Enter number:");
-	fflush(stdin); fflush(stdout);
-	scanf("%d",&n);
+	if(pwr>1)
+	{
+		--pwr;
+		val*=pwrfnc(pwr,base);
+	}
 
-	factorial=fact(n);
-
-	printf("factorial of %d = %d",n,factorial);
-
-return 0;
+	return val;
 }
 
-int fact(int n)
+int main ()
 {
-	if(n>=1)	return n*fact(n-1);
-	else 		return 1;
+	int base,pwr;
+	printf("Enter base, pwr: ");
+		fflush(stdin);	fflush(stdout);
+		scanf("%d %d",&base,&pwr);
+
+	int value=pwrfnc(pwr,base);
+	printf("%d",value);
+
+	return 0;
 }
