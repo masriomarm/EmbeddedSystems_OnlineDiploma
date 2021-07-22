@@ -1,0 +1,55 @@
+/*
+ * EX1: C Program to Store Information
+ * (name, roll and marks) of a Student Using Structure
+ *
+ * created on : July 21, 2021
+ * By : Omar Elmasri
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+struct Sdata
+{
+	char name[20];
+	int roll;
+	float mark;
+};
+
+void AqData(struct Sdata data[10], int ind)
+{
+	char Tname [20]; int Troll; float Tmark;
+
+	printf("Enter name: ");
+	fflush(stdin); fflush(stdout);
+	gets(Tname);
+
+	printf("Enter roll: ");
+	fflush(stdin); fflush(stdout);
+	scanf("%d",&Troll);
+
+	printf("Enter marks: ");
+	fflush(stdin); fflush(stdout);
+	scanf("%f",&Tmark);
+
+	strcpy(data[ind].name,Tname);
+	data[ind].roll=Troll;
+	data[ind].mark=Tmark;
+
+}
+
+void PrtData(struct Sdata data[10], int ind)
+{
+	printf("Displaying information\nname: %s\nRoll: %d\nMarks: %0.2f",data[ind].name,
+			data[ind].roll,data[ind].mark);
+
+}
+int main()
+{
+	struct Sdata data[10]; int DataInd=0;
+	AqData(data,DataInd);
+	PrtData(data,DataInd);
+
+	return 0;
+
+}
