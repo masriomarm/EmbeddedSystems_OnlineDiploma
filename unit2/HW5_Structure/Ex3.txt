@@ -1,0 +1,41 @@
+/*
+ * EX3: C Program to sum complex numbers using structures.
+ *
+ * created on : July 21, 2021
+ * By : Omar Elmasri
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+struct Sdist
+{
+	double real;
+	double complex;
+};
+
+void GetDist( struct Sdist dist[10], int ind)
+{
+	printf("Enter complex number %d\nEnter real and complex respectively: ",ind+1);
+	fflush(stdin);	fflush(stdout);
+	scanf("%lf",&dist[ind].real);
+	scanf("%lf",&dist[ind].complex);
+
+}
+
+void SumDist(struct Sdist dist1, struct Sdist dist2)
+{
+	if (dist1.complex+dist2.complex>=0)
+	printf("Sum = %0.2lf + %0.2lfi",dist1.real+dist2.real,dist1.complex+dist2.complex);
+	else printf("Sum = %0.2lf  %0.2lfi",dist1.real+dist2.real,dist1.complex+dist2.complex);
+}
+int main()
+{
+	struct Sdist dist[10]; int DistInd=0;
+	GetDist(dist,DistInd++);
+	GetDist(dist,DistInd);
+	SumDist(dist[0],dist[1]);
+
+	return 0;
+}
