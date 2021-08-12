@@ -1,0 +1,22 @@
+/*
+ * EX5: C Program to Store calculate area of circle using macro
+ *
+ * created on : Aug 12, 2021
+ * By : Omar Elmasri
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+#define flush	fflush(stdin);fflush(stdout);
+#define Area	3.141*r*r
+int main()
+{
+	int r;
+
+	printf("Enter radius\n");
+	flush
+	scanf("%d",&r);
+	printf("Area = %lf",Area);
+	return 0;
+}
