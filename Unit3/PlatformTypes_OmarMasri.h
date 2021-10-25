@@ -45,16 +45,16 @@ typedef uint32_t                uint32;
 typedef int64_t                 sint64;
 typedef uint64_t                uint64;
 
-typedef volatile int8_t         vint8;
-typedef volatile uint8_t        vuint8;
+typedef volatile int8_t         vint8_t;
+typedef volatile uint8_t        vuint8_t;
 
-typedef volatile int16_t        vint16;
-typedef volatile uint16_t       vuint16;
+typedef volatile int16_t        vint16_t;
+typedef volatile uint16_t       vuint16_t;
 
-typedef volatile int32_t        vint32;
-typedef volatile uint32_t       vuint32;
+typedef volatile int32_t        vint32_t;
+typedef volatile uint32_t       vuint32_t;
 
-typedef volatile int64_t        vint64;
-typedef volatile uint64_t       vuint64;
+typedef volatile int64_t        vint64_t;
+typedef volatile uint64_t       vuint64_t;
 
 #endif //PLATFORM_TYPES_H_
