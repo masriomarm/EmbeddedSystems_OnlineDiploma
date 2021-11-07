@@ -1,0 +1,3 @@
+LAB 1 is to send string on UART0 for verstailepb and emulating the board on qemu. 
+building startup.s and linkerscript.ld for the board 
+automating the build using Makefile.
