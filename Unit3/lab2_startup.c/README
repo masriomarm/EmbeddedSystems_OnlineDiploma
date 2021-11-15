@@ -1,0 +1,3 @@
+LAB 2 is to toggle LED connected to pin 13 on Port A 
+building startup.c (cortex-m3) and linkerscript.ld for the board 
+automating the build using Makefile.
