@@ -1,0 +1,15 @@
+20000400 B _E_bss
+20000000 T _E_data
+0000013c T _E_text
+20000000 B _S_bss
+20000000 T _S_data
+20000000 b _stacktop
+000000ac W Bus_fault_Handler
+000000ac T Default_Handler
+00000000 T gptr2fncVectors
+000000ac W H_fault_Handler
+0000001c T main
+000000ac W MM_fault_Handler
+000000ac W NMI_Handler
+000000b8 T Reset_Handler
+000000ac W Usage_fault_Handler
