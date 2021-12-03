@@ -6,4 +6,4 @@ build/
 *.project
 debug/
 .vscode
-.crswap
+.c.crswap
