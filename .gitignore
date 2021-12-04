@@ -2,3 +2,7 @@
 *.out
 *~
 *.exe
+*.vscode
+*.cproject
+*.project
+*.settings
