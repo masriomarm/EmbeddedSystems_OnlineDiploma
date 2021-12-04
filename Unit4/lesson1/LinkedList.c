@@ -41,6 +41,8 @@ struct Sstudent* pLastStudent = NULL; // end of list, its pointer should always 
 //  by the time 2x at the end, 1x shouold be at middle
 
 // []:reverse list
+
+
 	
 inline int alloc_check( void* ptr )
 {
