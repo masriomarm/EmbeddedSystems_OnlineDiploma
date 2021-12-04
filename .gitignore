@@ -6,3 +6,8 @@
 *.cproject
 *.project
 *.settings
+*.elf
+*.bin
+*.lib
+*.a
+*.hex
