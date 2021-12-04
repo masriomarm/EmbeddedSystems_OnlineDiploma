@@ -12,7 +12,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 #include <stdio.h>
 #include "string.h"
-#include "conio.h"
+// #include "conio.h"
 #include "stdint.h"
 #include "stdlib.h"
 
