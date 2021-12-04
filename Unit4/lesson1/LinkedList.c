@@ -28,6 +28,19 @@ struct Sstudent
 
 struct Sstudent* gpFirstStudent = NULL; //list head, only change value at addstudent first call.
 struct Sstudent* pLastStudent = NULL; // end of list, its pointer should always point to null.
+
+// []:get the nth node
+
+// []:count number of node
+
+// []:get the nth node from the end.
+// use 2 ptr with detr space = nth node
+
+// []:find the middle of linked list.
+//  use 2 ptr, one with speed 1x, other with 2x
+//  by the time 2x at the end, 1x shouold be at middle
+
+// []:reverse list
 	
 inline int alloc_check( void* ptr )
 {
