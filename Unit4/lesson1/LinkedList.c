@@ -178,7 +178,6 @@ void main()
 		printf("\n>>>loading... ");
 		switch(atoi(temp_text))
 		{
-			printf("\n");
 			case 1:
 			AddStuden();
 			break;
