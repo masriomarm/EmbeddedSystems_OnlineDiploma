@@ -39,7 +39,7 @@ struct Sstudent
 struct Sstudent* gpFirstStudent = NULL;		///list head, only change value at addstudent first call.
 struct Sstudent* pLastStudent = NULL;		/// end of list, its pointer should always point to null.
 
-#define IsListEmpty		if( gpFirstStudent == NULL ){printf("Empty list...");return 0;}
+#define IsListEmpty		if( gpFirstStudent == NULL ){printf("\n>>>\tEmpty list...");return 0;}
 
 inline int ListEmpty (struct Sstudent* head)
 {
@@ -55,6 +55,8 @@ inline int ListEmpty (struct Sstudent* head)
 // [d]:get the nth node
 int findIndex()
 {
+	IsListEmpty
+
 	/// request node index
 	char temp [BUF];
 	unsigned int index=1;
@@ -67,7 +69,6 @@ int findIndex()
 		printf("\nError... Index has to be >= 1\n");
 		return 0;
 	}
-	IsListEmpty
 
 	/// searching for node index
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
@@ -96,10 +97,20 @@ int findIndex()
 
 }
 
-// [w]:count number of node
+// [d]:count number of node
 int CountNodes()
 {
-	
+	IsListEmpty
+
+	unsigned int count=1;
+	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
+	while(tempptr->pNextStudent != NULL)
+	{
+		count++;
+		tempptr=tempptr->pNextStudent;
+	}
+	printf("\n>>>\tCount = %d",count);
+	return 1;
 }
 
 // [p]:get the nth node from the end.
@@ -256,7 +267,8 @@ void main()
 		printf("\n\t 3: View Student");
 		printf("\n\t 4: Delete All Students");
 		printf("\n\t 5: Find Index");
-		printf("\n\t 6: Exit");
+		printf("\n\t 6: Count Nodes");
+		printf("\n\t 7: Exit");
 		printf("\n\t Enter Option Number: ");
 
 		gets(temp_text);
@@ -279,6 +291,9 @@ void main()
 			findIndex();
 			break;
 			case 6:
+			CountNodes();
+			break;
+			case 7:
 			printf("Confirm Exit? [y/n]");
 			scanf("%c",&exitconfirm);
 			switch(exitconfirm)
