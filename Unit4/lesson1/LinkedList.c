@@ -1,7 +1,15 @@
+/**
+ * @file LinkedList.c
+ * @author Omar Elmasri (masri.omarm@gmail.com)
+ * @brief Embedded systems Diploma.
+ * unit 4 , lesson 1. DataStructure; LinkedList
+ *
+ * @version 0.1
+ * @date 2021-12-09
+ *
+ * @copyright Copyright (c) 2021
+ */
 
-//author: Omar Elmasri
-
-// Embedded systems Diploma, unit 4 , lesson 1. DataStructure; LinkedList
 
 #include <stdio.h>
 #include "string.h"
@@ -12,16 +20,16 @@
 //effective data
 struct Sdata
 {
-    int ID;
-    char name[40];
-    float height;
+	int ID;
+	char name[40];
+	float height;
 };
 
 //linked list node
 struct Sstudent
 {
-    struct Sdata student;
-    struct Sstudent* pNextStudent;
+	struct Sdata student;
+	struct Sstudent* pNextStudent;
 };
 
 #define ALLOC_FAIL		printf("\n\t\tmemory allocation failed... exit"); return 0;
@@ -29,25 +37,38 @@ struct Sstudent
 struct Sstudent* gpFirstStudent = NULL; //list head, only change value at addstudent first call.
 struct Sstudent* pLastStudent = NULL; // end of list, its pointer should always point to null.
 
-// []:get the nth node
+// [w]:get the nth node
 
-// []:count number of node
+int findIndex()
+{
+	/// request node index
+	char temp [40];
+	unsigned int index;
 
-// []:get the nth node from the end.
+	printf("\n\t Enter index to be found: ");
+	gets(temp);
+	index=atoi(temp);
+
+	/// searching for node index
+}
+
+// [p]:count number of node
+
+// [p]:get the nth node from the end.
 // use 2 ptr with detr space = nth node
 
-// []:find the middle of linked list.
+// [p]:find the middle of linked list.
 //  use 2 ptr, one with speed 1x, other with 2x
 //  by the time 2x at the end, 1x shouold be at middle
 
-// []:reverse list
+// [p]:reverse list
 
 
-	
+
 inline int alloc_check( void* ptr )
 {
 	//return 1 if allocation failed
-	if ( ptr == NULL ) 
+	if ( ptr == NULL )
 		{
 				printf("memory allocation failed... exit");
 				return 1;
@@ -70,9 +91,9 @@ int AddStuden()
 		gpFirstStudent = pNewStudent; //now head points to first entry
 		pLastStudent = pNewStudent; // first and last entry in the list
 		pLastStudent->pNextStudent = NULL; //closing the list
-		
+
 	}
-	
+
 	else // normal case where list contain records
 	// add new record
 	// last entry pointer should point to the new record added.
@@ -105,20 +126,20 @@ int DelStudent ()
 {
 	char temp [40];
 	unsigned int idtemp;
-	
+
 	printf("\n\t Enter student id to be deleted: ");
 	gets(temp);
 	idtemp=atoi(temp);
-	
+
 	if( gpFirstStudent == NULL )
 	{
 		printf("Empty list...");
 		return 0;
 	}
-	
+
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	struct Sstudent* prevptr= NULL;	//once desired entry is found, used to link to next entry
-	
+
 	while(tempptr)
 	{
 		if( tempptr->student.ID == idtemp )
@@ -127,14 +148,14 @@ int DelStudent ()
 				prevptr->pNextStudent = tempptr->pNextStudent;
 			else
 				gpFirstStudent = tempptr->pNextStudent;
-			
+
 			free((void*)tempptr);
 			return 1;
 		}
 		prevptr = tempptr;
 		tempptr = tempptr->pNextStudent;
 	}
-	
+
 	printf("\n no matched ID");
 	return 0;
 }
@@ -143,7 +164,7 @@ void ViewStudent()
 {
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	int count = 0;
-	
+
 	if (gpFirstStudent == NULL) printf("\n Empty List...");
 	else
 	{
@@ -157,7 +178,7 @@ void ViewStudent()
 		}
 	}
 }
- 
+
 void DelAll()
 {
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
@@ -177,7 +198,7 @@ void main()
 {
 	char temp_text[40];
 	char loopflag = 1; char exitconfirm;
-	
+
 	while (loopflag)
 	{
 		printf("\n\t =============================== \n");
@@ -188,7 +209,7 @@ void main()
 		printf("\n\t 4: Delete All Students");
 		printf("\n\t 5: Exit");
 		printf("\n\t Enter Option Number: ");
-		
+
 		gets(temp_text);
 		printf("\n>>>loading... ");
 		switch(atoi(temp_text))
@@ -202,7 +223,7 @@ void main()
 			case 4:
 			DelAll();
 			break;
-			case 3: 
+			case 3:
 			ViewStudent();
 			break;
 			case 5:
@@ -210,7 +231,7 @@ void main()
 			scanf("%c",&exitconfirm);
 			switch(exitconfirm)
 			{
-				case 'Y': 
+				case 'Y':
 				case 'y':
 				loopflag = 0;
 				break;
