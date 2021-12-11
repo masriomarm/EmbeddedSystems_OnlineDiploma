@@ -109,7 +109,6 @@ int CountNodes()
 		count++;
 		tempptr=tempptr->pNextStudent;
 	}
-	printf("\n>>>\tCount = %d",count);
 	return count;
 }
 
@@ -193,7 +192,8 @@ int ReverseList()
 		prev=current;
 		current=next;
 	}
-	gpFirstStudent=prev;	
+	gpFirstStudent=prev;
+	printf("\n\t...List Reversed was success!");
 }
 
 
@@ -359,7 +359,7 @@ int DelAll()
 void main()
 {
 	char temp_text[BUF];
-	char loopflag = 1; char exitconfirm;
+	char loopflag = 1; char exitconfirm;unsigned int count;
 
 	while (loopflag)
 	{
@@ -397,7 +397,8 @@ void main()
 			findIndex();
 			break;
 			case 6:
-			CountNodes();
+			count = CountNodes();
+			printf("\n>>>\tCount = %d",count);
 			break;
 			case 7:
 			NthFromEnd();
