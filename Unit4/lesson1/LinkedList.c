@@ -110,7 +110,7 @@ int CountNodes()
 		tempptr=tempptr->pNextStudent;
 	}
 	printf("\n>>>\tCount = %d",count);
-	return 1;
+	return count;
 }
 
 // [d]:get the nth node from the end.
@@ -156,11 +156,33 @@ int NthFromEnd()
 	printf("\n name: %s", tempptr->student.name);
 	printf("\n height: %0.2f", tempptr->student.height);	
 }
-// [p]:find the middle of linked list.
+// [d]:find the middle of linked list.
 //  use 2 ptr, one with speed 1x, other with 2x
-//  by the time 2x at the end, 1x shouold be at middle
+//  by the time 2x at the end, 1x shouold be at middle. FAKES, count instead. issues with memory boundary incase of ptr->next->next.
+int GetMiddleNode()
+{
+	///is list empty?
+	IsListEmpty
+	
+	///init 2 ptrs to gpfirst
+	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
+	///is list > 3
+	unsigned int count = CountNodes();
+	for(int i=0; i<count/2;i++)
+	{
+		tempptr=tempptr->pNextStudent;
+	}
+	///loop the list and find middle
+	printf("\n ID: %d", tempptr->student.ID);
+	printf("\n name: %s", tempptr->student.name);
+	printf("\n height: %0.2f", tempptr->student.height);
+}
 
-// [p]:reverse list
+// [w]:reverse list
+int ReverseList()
+{
+	
+}
 
 
 
@@ -213,7 +235,7 @@ int AddStuden()
 		fgets(temp,BUF,stdin);
 		pNewStudent->student.ID = atoi(temp);
 		printf("\n Enter the full name: ");
-		gets(pNewStudent->student.name);
+		fgets(pNewStudent->student.name,BUF,stdin);
 		printf("\n Enter the height: ");
 		fgets(temp,BUF,stdin);
 		pNewStudent->student.height = atof(temp);
@@ -293,7 +315,7 @@ void ViewStudent()
 	}
 }
 
-void DelAll()
+int DelAll()
 {
 	char delconfirm;
 	printf("\nConfirm delete all students? [y/n]");
@@ -338,10 +360,11 @@ void main()
 		printf("\n\t 5: Find Index");
 		printf("\n\t 6: Count Nodes");
 		printf("\n\t 7: Get Nth Node From End");
-		printf("\n\t 8: Exit");
+		printf("\n\t 8: Get Middle Node");
+		printf("\n\t 9: Exit");
 		printf("\n\t Enter Option Number: ");
 
-		gets(temp_text);
+		fgets(temp_text,BUF,stdin);
 		printf("\n>>>loading... ");
 		switch(atoi(temp_text))
 		{
@@ -367,6 +390,9 @@ void main()
 			NthFromEnd();
 			break;
 			case 8:
+			GetMiddleNode();
+			break;
+			case 9:
 			printf("Confirm Exit? [y/n]");
 			scanf("%c",&exitconfirm);
 			switch(exitconfirm)
@@ -387,19 +413,3 @@ void main()
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
