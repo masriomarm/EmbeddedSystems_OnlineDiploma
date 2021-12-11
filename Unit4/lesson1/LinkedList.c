@@ -113,9 +113,49 @@ int CountNodes()
 	return 1;
 }
 
-// [p]:get the nth node from the end.
+// [d]:get the nth node from the end.
 // use 2 ptr with detr space = nth node
+int NthFromEnd()
+{
+	IsListEmpty
 
+	/// request node index
+	char temp [BUF];
+	unsigned int index=1;
+
+	printf("\n\t Enter index to be found: ");
+	fgets(temp,BUF,stdin);
+	index=atoi(temp);
+	if (index<0)
+	{
+		printf("\nError... Index has to be >= 0\n");
+		return 0;
+	}
+
+	/// set 2 ptrs at head
+	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
+	struct Sstudent* tempptr_ahead= gpFirstStudent; // used to navigate through the list, will be ahead of tempptr
+	///set one ptr ahead
+	for (int i=0; i<index; i++)
+	{
+		/// if end of list while not reaching index
+		if (tempptr_ahead->pNextStudent==NULL)
+		{
+			printf("Index exceeds list");
+			return 0;
+		}
+		tempptr_ahead=tempptr_ahead->pNextStudent; ///offset ptr_ahead	
+	}
+	///loop the list until ptrahead->next is NULL
+	while (tempptr_ahead->pNextStudent)
+	{
+		tempptr_ahead=tempptr_ahead->pNextStudent;
+		tempptr=tempptr->pNextStudent; /// node nth from end
+	}
+	printf("\n ID: %d", tempptr->student.ID);
+	printf("\n name: %s", tempptr->student.name);
+	printf("\n height: %0.2f", tempptr->student.height);	
+}
 // [p]:find the middle of linked list.
 //  use 2 ptr, one with speed 1x, other with 2x
 //  by the time 2x at the end, 1x shouold be at middle
@@ -148,7 +188,7 @@ int AddStuden()
 		// }
 		//malloc success, make head points to the first record of the list
 		gpFirstStudent = pNewStudent; //now head points to first entry
-		pLastStudent = pNewStudent; // first and last entry in the 
+		pLastStudent = pNewStudent; // first and last entry in the
 		pNewStudent->pNextStudent=NULL;
 		pLastStudent->pNextStudent = NULL; //closing the list
 
@@ -183,6 +223,21 @@ int AddStuden()
 
 int DelStudent ()
 {
+	char delconfirm;
+	printf("\nConfirm delete students? [y/n]");
+	scanf("%c",&delconfirm);
+	switch(delconfirm)
+	{
+		case 'Y':case 'y':
+		break;
+		case 'N':case 'n':
+		return 0;
+		break;
+		default:
+		return 0;
+		break;
+	}
+
 	char temp [BUF];
 	unsigned int idtemp;
 
@@ -240,6 +295,20 @@ void ViewStudent()
 
 void DelAll()
 {
+	char delconfirm;
+	printf("\nConfirm delete all students? [y/n]");
+	scanf("%c",&delconfirm);
+	switch(delconfirm)
+	{
+		case 'Y':case 'y':
+		break;
+		case 'N':case 'n':
+		return 0;
+		break;
+		default:
+		return 0;
+		break;
+	}
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	struct Sstudent* currptr= tempptr;
 	int count = 0;
@@ -268,7 +337,8 @@ void main()
 		printf("\n\t 4: Delete All Students");
 		printf("\n\t 5: Find Index");
 		printf("\n\t 6: Count Nodes");
-		printf("\n\t 7: Exit");
+		printf("\n\t 7: Get Nth Node From End");
+		printf("\n\t 8: Exit");
 		printf("\n\t Enter Option Number: ");
 
 		gets(temp_text);
@@ -294,6 +364,9 @@ void main()
 			CountNodes();
 			break;
 			case 7:
+			NthFromEnd();
+			break;
+			case 8:
 			printf("Confirm Exit? [y/n]");
 			scanf("%c",&exitconfirm);
 			switch(exitconfirm)
