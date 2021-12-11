@@ -11,9 +11,9 @@
  */
 
 
+// #include "conio.h"
 #include <stdio.h>
 #include "string.h"
-// #include "conio.h"
 #include "stdint.h"
 #include "stdlib.h"
 
@@ -178,10 +178,22 @@ int GetMiddleNode()
 	printf("\n height: %0.2f", tempptr->student.height);
 }
 
-// [w]:reverse list
+// [d]:reverse list
 int ReverseList()
 {
-	
+	IsListEmpty
+
+	struct Sstudent* prev = NULL;
+	struct Sstudent* current = gpFirstStudent;
+	struct Sstudent* next = NULL;
+	while (current)
+	{
+		next = current->pNextStudent;
+		current->pNextStudent=prev;
+		prev=current;
+		current=next;
+	}
+	gpFirstStudent=prev;	
 }
 
 
@@ -361,7 +373,8 @@ void main()
 		printf("\n\t 6: Count Nodes");
 		printf("\n\t 7: Get Nth Node From End");
 		printf("\n\t 8: Get Middle Node");
-		printf("\n\t 9: Exit");
+		printf("\n\t 9: Reverse List");
+		printf("\n\t 10: Exit");
 		printf("\n\t Enter Option Number: ");
 
 		fgets(temp_text,BUF,stdin);
@@ -393,6 +406,9 @@ void main()
 			GetMiddleNode();
 			break;
 			case 9:
+			ReverseList();
+			break;
+			case 10:
 			printf("Confirm Exit? [y/n]");
 			scanf("%c",&exitconfirm);
 			switch(exitconfirm)
