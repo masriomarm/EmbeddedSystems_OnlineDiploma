@@ -3,7 +3,6 @@
  * @author Omar Elmasri (masri.omarm@gmail.com)
  * @brief Embedded systems Diploma.
  * unit 4 , lesson 1. DataStructure; LinkedList
- *
  * @version 0.1
  * @date 2021-12-09
  *
@@ -52,8 +51,8 @@ inline int ListEmpty (struct Sstudent* head)
 }
 
 
-// [d]:get the nth node
-int findIndex()
+// [d]:get the nth node'98456u8i90olp-;[\]
+int findIndex(void)
 {
 	IsListEmpty
 
@@ -98,7 +97,7 @@ int findIndex()
 }
 
 // [d]:count number of node
-int CountNodes()
+int CountNodes(void)
 {
 	IsListEmpty
 
@@ -109,12 +108,13 @@ int CountNodes()
 		count++;
 		tempptr=tempptr->pNextStudent;
 	}
+	printf("\n\tNodes count = %d",count);
 	return count;
 }
 
 // [d]:get the nth node from the end.
 // use 2 ptr with detr space = nth node
-int NthFromEnd()
+int NthFromEnd(void)
 {
 	IsListEmpty
 
@@ -143,7 +143,7 @@ int NthFromEnd()
 			printf("Index exceeds list");
 			return 0;
 		}
-		tempptr_ahead=tempptr_ahead->pNextStudent; ///offset ptr_ahead	
+		tempptr_ahead=tempptr_ahead->pNextStudent; ///offset ptr_ahead
 	}
 	///loop the list until ptrahead->next is NULL
 	while (tempptr_ahead->pNextStudent)
@@ -153,16 +153,17 @@ int NthFromEnd()
 	}
 	printf("\n ID: %d", tempptr->student.ID);
 	printf("\n name: %s", tempptr->student.name);
-	printf("\n height: %0.2f", tempptr->student.height);	
+	printf("\n height: %0.2f", tempptr->student.height);
 }
+
 // [d]:find the middle of linked list.
 //  use 2 ptr, one with speed 1x, other with 2x
 //  by the time 2x at the end, 1x shouold be at middle. FAKES, count instead. issues with memory boundary incase of ptr->next->next.
-int GetMiddleNode()
+int GetMiddleNode(void)
 {
 	///is list empty?
 	IsListEmpty
-	
+
 	///init 2 ptrs to gpfirst
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	///is list > 3
@@ -178,7 +179,7 @@ int GetMiddleNode()
 }
 
 // [d]:reverse list
-int ReverseList()
+int ReverseList(void)
 {
 	IsListEmpty
 
@@ -196,8 +197,6 @@ int ReverseList()
 	printf("\n\t...List Reversed was success!");
 }
 
-
-
 inline int alloc_check( void* ptr )
 {
 	//return 1 if allocation failed
@@ -208,7 +207,8 @@ inline int alloc_check( void* ptr )
 		}
 	else		return 0;
 }
-int AddStuden()
+
+int AddStuden(void)
 {
 	struct Sstudent* pNewStudent;
 	char temp [BUF];
@@ -255,7 +255,7 @@ int AddStuden()
 		return 0;
 }
 
-int DelStudent ()
+int DelStudent(void)
 {
 	char delconfirm;
 	printf("\nConfirm delete students? [y/n]");
@@ -308,7 +308,7 @@ int DelStudent ()
 	return 0;
 }
 
-void ViewStudent()
+int ViewStudent(void)
 {
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	int count = 0;
@@ -325,9 +325,10 @@ void ViewStudent()
 			tempptr=tempptr->pNextStudent;
 		}
 	}
+	return 0;
 }
 
-int DelAll()
+int DelAll(void)
 {
 	char delconfirm;
 	printf("\nConfirm delete all students? [y/n]");
@@ -345,10 +346,14 @@ int DelAll()
 	}
 	struct Sstudent* tempptr= gpFirstStudent; // used to navigate through the list
 	struct Sstudent* currptr= tempptr;
-	int count = 0;
 
 		while(tempptr)
 		{
+			if(tempptr->pNextStudent == NULL)
+			{
+				free((void*)tempptr);
+				return 0;
+			}
 			currptr=tempptr;
 			tempptr=tempptr->pNextStudent;
 			free((void*)currptr);
@@ -356,13 +361,42 @@ int DelAll()
 		gpFirstStudent = NULL;
 }
 
-void main()
+int ExitList(void)
 {
-	char temp_text[BUF];
-	char loopflag = 1; char exitconfirm;unsigned int count;
-
-	while (loopflag)
+	char exitconfirm;
+	printf("Confirm Exit? [y/n]");
+	scanf("%c",&exitconfirm);
+	switch(exitconfirm)
 	{
+		case 'Y':
+		case 'y':
+		exit(1);
+		break;
+		case 'N': case 'n':
+		return 0;
+		break;
+		default:
+		return 0;
+		break;
+	}
+}
+
+#define FCNS_COUNT		10
+int (* FcnPtr[FCNS_COUNT])(void)={
+	AddStuden,
+	DelStudent,
+	ViewStudent,
+	DelAll,
+	findIndex,
+	CountNodes,
+	NthFromEnd,
+	GetMiddleNode,
+	ReverseList,
+	ExitList
+};
+
+void Disp_Options(void)
+{
 		printf("\n\t =============================== \n");
 		printf("\n\t Choose of the following options \n");
 		printf("\n\t 1: Add Student");
@@ -377,56 +411,23 @@ void main()
 		printf("\n\t 10: Exit");
 		printf("\n\t Enter Option Number: ");
 
+}
+void main()
+{
+	Disp_Options();
+	char temp_text[BUF];
+	char loopflag = 1; unsigned int count;
+
+	while (loopflag)
+	{
 		fgets(temp_text,BUF,stdin);
 		printf("\n>>>loading... ");
-		switch(atoi(temp_text))
-		{
-			case 1:
-			AddStuden();
-			break;
-			case 2:
-			DelStudent();
-			break;
-			case 4:
-			DelAll();
-			break;
-			case 3:
-			ViewStudent();
-			break;
-			case 5:
-			findIndex();
-			break;
-			case 6:
-			count = CountNodes();
-			printf("\n>>>\tCount = %d",count);
-			break;
-			case 7:
-			NthFromEnd();
-			break;
-			case 8:
-			GetMiddleNode();
-			break;
-			case 9:
-			ReverseList();
-			break;
-			case 10:
-			printf("Confirm Exit? [y/n]");
-			scanf("%c",&exitconfirm);
-			switch(exitconfirm)
-			{
-				case 'Y':
-				case 'y':
-				loopflag = 0;
-				break;
-				case 'N': case 'n':
-				break;
-				default:
-				break;
-			}
-			break;
-			default:
-			printf("wrong option");
-			break;
+
+		if(	((atoi(temp_text))	>	FCNS_COUNT) || ((atoi(temp_text))	<	0)){			/// incase of invalid choise
+			printf("\n\tInvalid choise, please choose value between 1 and %d",FCNS_COUNT);
+			continue;
 		}
+
+		FcnPtr[(atoi(temp_text)-1)]();
 	}
 }
