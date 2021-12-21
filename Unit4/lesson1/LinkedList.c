@@ -418,9 +418,8 @@ void main()
 	char temp_text[BUF];
 	char loopflag = 1; unsigned int count;
 
-	while (loopflag)
-	{
-		fgets(temp_text,BUF,stdin);
+	while (loopflag)	{
+		fgets(temp_text, BUF, stdin);
 		printf("\n>>>loading... ");
 
 		if(	((atoi(temp_text))	>	FCNS_COUNT) || ((atoi(temp_text))	<	0)){			/// incase of invalid choise
@@ -428,6 +427,6 @@ void main()
 			continue;
 		}
 
-		FcnPtr[(atoi(temp_text)-1)]();
+		FcnPtr[(atoi(temp_text) - 1)]();
 	}
 }
