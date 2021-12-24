@@ -3,12 +3,15 @@
 *.a
 
 *~
+*.txt
 
 *.out
 *.exe
 *.elf
 *.bin
 *.hex
+
+main
 
 *.vscode
 *.cproject
