@@ -4,6 +4,9 @@
 
 *~
 *.txt
+*.swo
+*.swp
+
 
 *.out
 *.exe
