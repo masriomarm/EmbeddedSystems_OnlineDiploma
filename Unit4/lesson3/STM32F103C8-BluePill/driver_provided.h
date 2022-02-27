@@ -1,3 +1,6 @@
+#ifndef DRIVER_PROVIDED_H_
+#define DRIVER_PROVIDED_H_
+
 #include <stdint.h>
 #include <stdio.h>
 
@@ -20,3 +23,6 @@ void Delay(int nCount);
 int  getPressureVal();
 void Set_Alarm_actuator(int i);
 void GPIO_INITIALIZATION();
+
+
+#endif ///< DRIVER_PROVIDED_H_

@@ -23,6 +23,7 @@ main
 
 **/LinkedList
 
+build/
 test/
 latex/
 man/

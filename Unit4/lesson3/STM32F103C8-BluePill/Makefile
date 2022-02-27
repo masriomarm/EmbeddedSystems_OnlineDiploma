@@ -2,7 +2,7 @@
 #output $@, input $<
 
 CC=arm-none-eabi-
-CFLAGS= -gdwarf-2
+CFLAGS= -g -gdwarf-2
 CPU= -mcpu=cortex-m3
 INCS= -I .
 LIBS=
@@ -10,7 +10,8 @@ SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 AsSRC = $(wildcard *.s)
 AsOBJ = $(AsSRC:.s=.o)
-PrjName=unit4-les3-prj
+BuildDir = build/
+PrjName=PressureAlarm
 
 
 exec: $(PrjName).bin
@@ -26,12 +27,17 @@ exec: $(PrjName).bin
 	$(CC)as $(CPU) $(CFLAGS) $< -o $@
 
 $(PrjName).elf: $(OBJ) $(AsOBJ)
-	$(CC)ld -T linkerscript.ld $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=MapFile.map
+	mkdir $(BuildDir)
+	mv *.o -t $(BuildDir)
+	cp linkerscript.ld $(BuildDir)
+	cd $(BuildDir) && $(CC)ld -T linkerscript.ld $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=MapFile.map
 
 $(PrjName).bin: $(PrjName).elf
-	$(CC)objcopy -O binary $< $@
+	cd $(BuildDir) && $(CC)objcopy -O binary $< $@
 
-cleanall: 
+cleanall:
+	rm -r $(BuildDir)
 	rm *.o *.bin *.elf *.asm *.map
-cleanbin: 
+cleanbin:
+	cd $(BuildDir)
 	rm *.bin *.elf
