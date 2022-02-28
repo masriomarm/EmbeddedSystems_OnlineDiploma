@@ -21,6 +21,7 @@
 #include "mainAlg.h"
 
 int AlarmFlag = 0;
+void (*state_ptr_main)(void);
 
 void init(void) {
     GPIO_INITIALIZATION();
@@ -33,9 +34,9 @@ void init(void) {
 
 /// represent state where pressure value is above or equal threshold
 STATE(HighPressure) {
-    /// start alarm
-    AlarmFlag = 1;
-    Set_Alarm_actuator(AlarmFlag);  /// using the driver provided
+    /// start alarm.
+    AlarmFlag = 0;  /// reverse flag to match reverse polarity provided by the user.
+    Set_Alarm_actuator(AlarmFlag);  /// using the driver provided.
 
     /// start timer
     Delay(ALARM_PERIOD);
@@ -47,7 +48,7 @@ STATE(HighPressure) {
 /// represent state where pressure value is below threshold
 STATE(SafePressure) {
     /// stop alarm
-    AlarmFlag = 0;
+    AlarmFlag = 1;  /// reverse flag to match reverse polarity provided by the user.
     Set_Alarm_actuator(AlarmFlag);  /// using the driver provided
 
     /// switch state

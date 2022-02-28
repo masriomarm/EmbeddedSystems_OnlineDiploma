@@ -16,9 +16,9 @@
 #include "driver_provided.h"
 #include "stdint.h"
 
-void (*state_ptr_main)(void);   /// switch main states
-void (*state_ptr_sensor_pressure)(void); /// not used since using the driver provided by the user.
-void (*state_ptr_actuator_alarm)(void); /// not used since using the driver provided by the user.
+extern void (*state_ptr_main)(void);   /// switch main states
+extern void (*state_ptr_sensor_pressure)(void); /// not used since using the driver provided by the user.
+extern void (*state_ptr_actuator_alarm)(void); /// not used since using the driver provided by the user.
 
 extern int AlarmFlag;
 

@@ -8,7 +8,7 @@
 #define STATE(x)       void x(void)
 
 #define PRESSURE_THRESHOLD 20
-#define ALARM_PERIOD       6e3
+#define ALARM_PERIOD       9e5
 
 STATE(HighPressure);
 STATE(SafePressure);

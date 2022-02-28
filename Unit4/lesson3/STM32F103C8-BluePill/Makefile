@@ -16,6 +16,7 @@ OutDir = output/
 ASI = AssemblyInstructions
 ALH = AllHeaders
 SYMs = SymbolsTable
+MAP = MapFile.map
 LinkerFile = linkerscript.ld
 PrjName=PressureAlarm
 
@@ -33,14 +34,14 @@ $(PrjName).elf: $(OBJ) $(AsOBJ)
 	mkdir $(BuildDir) || cd $(BuildDir)
 	mv *.o -t $(BuildDir)
 	cp $(LinkerFile) $(BuildDir)
-	cd $(BuildDir) && $(CC)ld -T $(LinkerFile) $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=MapFile.map
+	cd $(BuildDir) && $(CC)ld -T $(LinkerFile) $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=$(MAP)
 
 $(PrjName).bin: $(PrjName).elf
 	cd $(BuildDir) && $(CC)objdump -D $< >> $(ASI)_$(PrjName)
 	cd $(BuildDir) && $(CC)objdump -x $< >> $(ALH)_$(PrjName)
 	cd $(BuildDir) && $(CC)nm $< >> $(SYMs)_$(PrjName)
 	-mkdir $(OutDir)
-	cp $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(OutDir)
+	cp $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP)  $(OutDir)
 	cp -u latex/refman.pdf $(OutDir)
 	cd $(BuildDir) && $(CC)objcopy -O binary $< $@
 

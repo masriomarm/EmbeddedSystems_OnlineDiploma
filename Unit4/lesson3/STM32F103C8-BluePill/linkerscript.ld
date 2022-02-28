@@ -9,15 +9,17 @@ flash(RX)	:	ORIGIN = 0x08000000, LENGTH = 128K
 sram(RWX)	:	ORIGIN = 0x20000000, LENGTH = 20K
 }
 
-SECTIONS 
+SECTIONS
 {
-	.text : {
+	.text : ALIGN(4)
+	{
 			*(.vectors*)
 			*(.text*)
 			*(.rodata)
 	}> flash
 
-	.data : {
+	.data : ALIGN(4)
+	{
 			*(.data)
 	}> flash
 
