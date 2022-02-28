@@ -21,6 +21,7 @@
 #include "mainAlg.h"
 
 int AlarmFlag = 0;
+
 void init(void) {
     GPIO_INITIALIZATION();
     state_ptr_main = ReceivingPressureVal;
@@ -30,6 +31,7 @@ void init(void) {
 
 //[d]: high pressure state
 
+/// represent state where pressure value is above or equal threshold
 STATE(HighPressure) {
     /// start alarm
     AlarmFlag = 1;
@@ -42,6 +44,7 @@ STATE(HighPressure) {
     state_ptr_main = ReceivingPressureVal;
 }
 //[d]: safe pressure state
+/// represent state where pressure value is below threshold
 STATE(SafePressure) {
     /// stop alarm
     AlarmFlag = 0;
@@ -51,6 +54,7 @@ STATE(SafePressure) {
     state_ptr_main = ReceivingPressureVal;
 }
 //[d]: receiving pressure state
+/// represent state where pressure value is being measured
 STATE(ReceivingPressureVal) {
     /// read pressure value
     int pressure = PressureSensor_set_pressure();

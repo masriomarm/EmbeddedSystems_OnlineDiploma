@@ -15,13 +15,14 @@
 *.hex
 
 main
+Doxyfile
+doxyfile
 
 *.vscode
 *.cproject
 *.project
 *.settings
 
-**/LinkedList
 
 build/
 test/
