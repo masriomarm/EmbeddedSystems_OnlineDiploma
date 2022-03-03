@@ -40,7 +40,7 @@ $(PrjName).bin: $(PrjName).elf
 	cd $(BuildDir) && $(CC)objdump -D $< >> $(ASI)_$(PrjName)
 	cd $(BuildDir) && $(CC)objdump -x $< >> $(ALH)_$(PrjName)
 	cd $(BuildDir) && $(CC)nm $< >> $(SYMs)_$(PrjName)
-	-mkdir $(OutDir)
+	mkdir $(OutDir) || cd $(OutDir)
 	cp $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP)  $(OutDir)
 	cp -u latex/refman.pdf $(OutDir)
 	cd $(BuildDir) && $(CC)objcopy -O binary $< $@

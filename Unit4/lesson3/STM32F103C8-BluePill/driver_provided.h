@@ -24,5 +24,4 @@ int  getPressureVal();
 void Set_Alarm_actuator(int i);
 void GPIO_INITIALIZATION();
 
-
-#endif ///< DRIVER_PROVIDED_H_
+#endif  ///< DRIVER_PROVIDED_H_

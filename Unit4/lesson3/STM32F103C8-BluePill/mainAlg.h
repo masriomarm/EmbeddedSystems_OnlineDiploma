@@ -1,6 +1,17 @@
 #ifndef MAINALG_H_
 #define MAINALG_H_
 
+/**
+ * @file mainAlg.h
+ * @author Omar Elmasri (masri.omarm@gmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-02-28
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include "driver_PressureSensor.h"
 #include "driver_provided.h"
 #include "globals.h"

@@ -16,6 +16,6 @@
 
 /// function calls
 
-int  PressureSensor_set_pressure(void);
+int PressureSensor_set_pressure(void);
 
 #endif  ///< DRIVER_PRESSURESENSOR_H_
