@@ -2,16 +2,18 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+// #include "strings.h"
 
-#define MAX_LINE_LENGTH   256
-#define MAX_WORD_LENGTH   20
-#define TYPE_IN_FILE      unsigned char
+#define MAX_LINE_LENGTH     256
+#define MAX_WORD_LENGTH     20
+#define TYPE_IN_FILE        unsigned char
 
-#define ROLL_NUM_LENGTH   3
-#define NAME_FIRST_LENGTH 15
-#define NAME_LAST_LENGTH  15
-#define GPA_LENGTH        5
-#define COURSE_LENGTH     5
+#define ROLL_NUM_LENGTH     3
+#define NAME_FIRST_LENGTH   15
+#define NAME_LAST_LENGTH    15
+#define GPA_LENGTH          5
+#define COURSE_LENGTH       5
+#define ITEMS_BEFORE_COURSE 4
 
 typedef struct S_StduentData {
   char rollnum[ROLL_NUM_LENGTH];
@@ -43,40 +45,37 @@ int main() {
   // extract words from each line
   // assign each word to its correspending
   while (fgets(line, MAX_LINE_LENGTH, file)) {
-    index_line = 0;
     while (line[index_line] != '\n') {
-      if (line[index_line] == ' ' && index_word > 0) {
-        map_words(word_order,
-                  word); // map words order to its correspending data
+      if (line[index_line] != ' ') { // get word
+        word[index_word++] = line[index_line];
+      }
+      if ((line[index_line] == ' ' && index_word > 0) ||
+          (line[index_line + 1] == '\n' &&
+           index_word > 0)) { // dump word if next char is space or newline.
+        map_words(word_order, word); // qbzero(word,sizeof(word)); // explicit_bzero(word, sizeof(word));
         memset(word, 0, sizeof(word)); // reset word to receive next word
         word_order++;
         index_word = 0;
-      } else if (line[index_line] != ' ') {
-        word[index_word++] = line[index_line];
-        if (line[index_line + 1] == '\n') {
-          map_words(word_order,
-                    word); // map words order to its correspending data
-          memset(word, 0, sizeof(word)); // reset word to receive next word
-          word_order++;
-          index_word = 0;
-        }
       }
       index_line++;
     }
     word_order = 1;
+    index_line = 0;
   }
   fclose(file);
 }
 
 void map_words(TYPE_IN_FILE order, TYPE_IN_FILE *word) {
 
-  if (order < 0)
+  if (order <= 0 || order > COURSE_LENGTH + ITEMS_BEFORE_COURSE)
     return;
   switch (order) {
-  case 1: strcpy(student.rollnum, word); break;
-  case 2: strcpy(student.name_first, word); break;
-  case 3: strcpy(student.name_last, word); break;
-  case 4: strcpy(student.gpa, word); break;
-  default: strcpy(student.course[order - 5], word); break;
+    case 1: strcpy(student.rollnum, word); break;
+    case 2: strcpy(student.name_first, word); break;
+    case 3: strcpy(student.name_last, word); break;
+    case 4: strcpy(student.gpa, word); break;
+    default: {
+      strcpy(student.course[order - ITEMS_BEFORE_COURSE - 1], word);
+      break;
+    }
   }
-}
