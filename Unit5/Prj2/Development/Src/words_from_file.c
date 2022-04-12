@@ -79,3 +79,4 @@ void map_words(TYPE_IN_FILE order, TYPE_IN_FILE *word) {
       break;
     }
   }
+}
