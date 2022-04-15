@@ -12,6 +12,7 @@ OBJ = $(SRC:.c=.o)
 AsSRC = $(wildcard *.s)
 AsOBJ = $(AsSRC:.s=.o)
 BuildDir = build/
+ObjDir = obj/
 OutDir = output/
 ASI = AssemblyInstructions
 ALH = AllHeaders
@@ -35,14 +36,17 @@ $(PrjName).elf: $(OBJ) $(AsOBJ)
 	mv *.o -t $(BuildDir)
 	cp $(LinkerFile) $(BuildDir)
 	cd $(BuildDir) && $(CC)ld -T $(LinkerFile) $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=$(MAP)
+	mkdir $(ObjDir) || cd $(ObjDir)
+	cd $(BuildDir) && mv *.o -t $(ObjDir)
 
 $(PrjName).bin: $(PrjName).elf
 	cd $(BuildDir) && $(CC)objdump -D $< >> $(ASI)_$(PrjName)
 	cd $(BuildDir) && $(CC)objdump -x $< >> $(ALH)_$(PrjName)
 	cd $(BuildDir) && $(CC)nm $< >> $(SYMs)_$(PrjName)
 	mkdir $(OutDir) || cd $(OutDir)
-	cp $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP)  $(OutDir)
+	mv $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP)  $(OutDir)
 	cp -u latex/refman.pdf $(OutDir)
+	cd $(BuildDir) && $(CC)objcopy -O ihex $< $(PrjName).hex
 	cd $(BuildDir) && $(CC)objcopy -O binary $< $@
 
 cleanall:
