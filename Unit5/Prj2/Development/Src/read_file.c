@@ -9,15 +9,12 @@
  *
  */
 
-#include "read_file.h"
+#include "main.h"
 
 //[d]: read from file and map data.
 
 #define MAX_LINE_LENGTH 256
 #define MAX_WORD_LENGTH 20
-
-void    map_words(TYPE_IN_FILE, const char *, student_data_t *, TYPE_IN_FILE);
-uint8_t rollnum_fail(const char *, student_data_t *, TYPE_IN_FILE);
 
 void read_file() {
   TYPE_IN_FILE line[MAX_LINE_LENGTH] = {0};
@@ -31,7 +28,7 @@ void read_file() {
   FILE *file = fopen(FILE_NAME_PRJ2, "r");
   if (!file) {
     perror(FILE_NAME_PRJ2);
-    return EXIT_FAILURE;
+    return;
   }
 
   // Get each line until there are none left
@@ -46,7 +43,9 @@ void read_file() {
       if ((line[index_line] == ' ' && index_word > 0) ||
           (line[index_line + 1] == '\n' &&
            index_word > 0)) { // dump word if next char is space or newline.
-        map_words(word_order, word, &(students[line_order]), line_order);
+        if (map_words(word_order, word, &(students[line_order]), line_order)){
+          line_order--;
+        }
         memset(word, 0, sizeof(word)); // reset word to receive next word
         word_order++, index_word = 0;
       }
@@ -57,7 +56,7 @@ void read_file() {
   fclose(file);
   printf("Student details added successfully!\n");
 
-  {
+    {
     uint8_t current = 0;
     do {
       printf("%s\t%s\t%s\t%s\n", students[current].rollnum,
@@ -71,16 +70,16 @@ void read_file() {
   }
 }
 
-void map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
+uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
                TYPE_IN_FILE studen_order) {
 
   if (order <= 0 || order > COURSE_LENGTH + ITEMS_BEFORE_COURSE)
-    return;
+    return 2;
   switch (order) {
     case 1:
       if (rollnum_fail(src, dest_S, studen_order)) {
         printf("Roll Number %s is already taken!\n", src);
-        return;
+        return 1;
       }
       strncpy(dest_S->rollnum, src, strlen(src));
       printf("Roll Number %s saved successfully!\n", src);
@@ -94,6 +93,7 @@ void map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
       break;
     }
   }
+  return 0;
 }
 
 uint8_t rollnum_fail(const char *src, student_data_t *dest_S,

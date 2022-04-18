@@ -6,14 +6,27 @@
 #include "stdlib.h"
 #include "string.h"
 
-#include "read_file.h"
+#define ROLL_NUM_LENGTH     3
+#define NAME_FIRST_LENGTH   15
+#define NAME_LAST_LENGTH    15
+#define GPA_LENGTH          5
+#define COURSE_LENGTH       5
+#define ITEMS_BEFORE_COURSE 4
+
+typedef struct S_StduentData {
+  char rollnum[ROLL_NUM_LENGTH];
+  char name_first[NAME_FIRST_LENGTH];
+  char name_last[NAME_LAST_LENGTH];
+  char gpa[GPA_LENGTH];
+  char course[COURSE_LENGTH][3];
+} student_data_t;
 
 #define MAX_STUDENT_NUM 10
 extern student_data_t students[MAX_STUDENT_NUM];
 
+#include "read_file.h"
+
 void    read_file(void);
-void    map_words(TYPE_IN_FILE, const char *, student_data_t *, char);
-uint8_t rollnum_fail(const char *, student_data_t *, TYPE_IN_FILE);
 
 void read_manual(void);
 void find_rollnum(void);

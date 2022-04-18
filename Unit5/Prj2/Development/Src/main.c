@@ -14,7 +14,7 @@ student_data_t students[MAX_STUDENT_NUM];
 
 #define FCNS_COUNT 10
 void (*FcnPtr[FCNS_COUNT])(void) = {
-    read_file,    read_manual,      find_rollnum,   find_firstname,
+    read_manual,  read_file,        find_rollnum,   find_firstname,
     find_coureid, totalnum_student, delete_rollnum, update_rollnum,
     show_all,     exit_all};
 
@@ -37,13 +37,12 @@ void Disp_Options(void) {
 #define BUF 3
 int main() {
   Disp_Options();
-  char         temp_text[BUF];
-  char         loopflag = 1;
-  unsigned int count;
+  char temp_text[BUF];
+  char loopflag = 1;
 
   while (loopflag) {
     fgets(temp_text, BUF, stdin);
-    printf("\n>>>loading... ");
+    printf("\n>>>... \n");
 
     if (((atoi(temp_text)) > FCNS_COUNT) ||
         ((atoi(temp_text)) < 0)) { /// incase of invalid choise

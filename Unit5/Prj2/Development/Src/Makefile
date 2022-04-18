@@ -1,0 +1,57 @@
+#Omar Elmasri
+#masri.omarm@gmail.com
+#output $@, input $<
+
+CC=
+CFLAGS= -g -gdwarf-2
+CPU=
+INCS=
+LIBS=
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+AsSRC = $(wildcard *.s)
+AsOBJ = $(AsSRC:.s=.o)
+BuildDir = build/
+ObjDir = obj/
+OutDir = output/
+ASI = AssemblyInstructions
+ALH = AllHeaders
+SYMs = SymbolsTable
+MAP = MapFile.map
+LinkerFile = linkerscript.ld
+PrjName=Student-management
+
+
+exec: $(PrjName).bin
+	@echo "... sucess!"
+
+%.o: %.c
+	$(CC)gcc -c  $(INCS) $(CPU) $(CFLAGS) $< -o $@
+
+%.o: %.s
+	$(CC)as $(CPU) $(CFLAGS) $< -o $@
+
+$(PrjName).elf: $(OBJ) $(AsOBJ)
+	mkdir $(BuildDir) || cd $(BuildDir)
+	mv *.o -t $(BuildDir)
+	cp $(LinkerFile) $(BuildDir)
+	cd $(BuildDir) && $(CC)ld $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=$(MAP)
+	mkdir $(ObjDir) || cd $(ObjDir)
+	cd $(BuildDir) && mv *.o -t $(ObjDir)
+
+$(PrjName).bin: $(PrjName).elf
+	cd $(BuildDir) && $(CC)objdump -D $< >> $(ASI)_$(PrjName)
+	cd $(BuildDir) && $(CC)objdump -x $< >> $(ALH)_$(PrjName)
+	cd $(BuildDir) && $(CC)nm $< >> $(SYMs)_$(PrjName)
+	mkdir $(OutDir) || cd $(OutDir)
+	mv $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP)  $(OutDir)
+#cp -u latex/refman.pdf $(OutDir)
+	cd $(BuildDir) && $(CC)objcopy -O ihex $< $(PrjName).hex
+	cd $(BuildDir) && $(CC)objcopy -O binary $< $@
+
+cleanall:
+	rm -r $(BuildDir)
+	rm -r $(OutDir)
+
+cleanbin:
+	cd $(BuildDir) && rm *.bin *.elf
