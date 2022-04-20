@@ -6,6 +6,9 @@
 #include "stdlib.h"
 #include "string.h"
 
+#define MAX_LINE_LENGTH 256
+#define MAX_WORD_LENGTH 20
+
 #define ROLL_NUM_LENGTH     3
 #define NAME_FIRST_LENGTH   15
 #define NAME_LAST_LENGTH    15

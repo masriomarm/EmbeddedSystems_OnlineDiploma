@@ -13,9 +13,6 @@
 
 //[d]: read from file and map data.
 
-#define MAX_LINE_LENGTH 256
-#define MAX_WORD_LENGTH 20
-
 void read_file() {
   TYPE_IN_FILE line[MAX_LINE_LENGTH] = {0};
   uint8_t      index_line            = 0;
@@ -64,6 +61,11 @@ uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
     return 2;
   switch (order) {
     case 1:
+    // bug: everyting returns 0 lol.
+      if (0 == (atoi(students->rollnum))) {
+        printf("roll number must be digit\n");
+        return 3;
+      }
       if (rollnum_fail(src, dest_S, studen_order)) {
         printf("Roll Number %s is already taken!\n", src);
         return 1;
