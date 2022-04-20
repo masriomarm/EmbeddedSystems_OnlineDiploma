@@ -24,10 +24,10 @@ typedef struct S_StduentData {
 #define MAX_STUDENT_NUM 10
 extern student_data_t students[MAX_STUDENT_NUM];
 
+#include "prj2_functions.h"
 #include "read_file.h"
 
-void    read_file(void);
-
+void read_file(void);
 void read_manual(void);
 void find_rollnum(void);
 void find_firstname(void);

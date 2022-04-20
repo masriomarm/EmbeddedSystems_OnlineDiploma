@@ -43,7 +43,7 @@ void read_file() {
       if ((line[index_line] == ' ' && index_word > 0) ||
           (line[index_line + 1] == '\n' &&
            index_word > 0)) { // dump word if next char is space or newline.
-        if (map_words(word_order, word, &(students[line_order]), line_order)){
+        if (map_words(word_order, word, &(students[line_order]), line_order)) {
           line_order--;
         }
         memset(word, 0, sizeof(word)); // reset word to receive next word
@@ -55,23 +55,10 @@ void read_file() {
   }
   fclose(file);
   printf("Student details added successfully!\n");
-
-    {
-    uint8_t current = 0;
-    do {
-      printf("%s\t%s\t%s\t%s\n", students[current].rollnum,
-             students[current].name_first, students[current].name_last,
-             students[current].gpa);
-      printf("%s\t%s\t%s\t%s\t%s\n", students[current].course[0],
-             students[current].course[1], students[current].course[2],
-             students[current].course[3], students[current].course[4]);
-      current++;
-    } while (atoi(students[current].rollnum) != 0);
-  }
 }
 
 uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
-               TYPE_IN_FILE studen_order) {
+                  TYPE_IN_FILE studen_order) {
 
   if (order <= 0 || order > COURSE_LENGTH + ITEMS_BEFORE_COURSE)
     return 2;
