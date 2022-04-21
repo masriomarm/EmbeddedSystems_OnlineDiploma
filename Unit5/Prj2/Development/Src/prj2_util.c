@@ -13,56 +13,20 @@
 
 //[d]: read from file and map data.
 
-void read_file() {
-  TYPE_IN_FILE line[MAX_LINE_LENGTH] = {0};
-  uint8_t      index_line            = 0;
-  uint8_t      line_order            = 0;
-  TYPE_IN_FILE word[MAX_WORD_LENGTH] = {0};
-  uint8_t      index_word            = 0;
-  uint8_t      word_order            = 1;
-
-  // Open file
-  FILE *file = fopen(FILE_NAME_PRJ2, "r");
-  if (!file) {
-    perror(FILE_NAME_PRJ2);
-    return;
-  }
-
-  // Get each line until there are none left
-  // extract words from each line
-  // assign each word to its correspending
-
-  while (fgets(line, MAX_LINE_LENGTH, file)) {
-    while (line[index_line] != '\n') {
-      if (line[index_line] != ' ') { // get word
-        word[index_word++] = line[index_line];
-      }
-      if ((line[index_line] == ' ' && index_word > 0) ||
-          (line[index_line + 1] == '\n' &&
-           index_word > 0)) { // dump word if next char is space or newline.
-        if (map_words(word_order, word, &(students[line_order]), line_order)) {
-          line_order--;
-        }
-        memset(word, 0, sizeof(word)); // reset word to receive next word
-        word_order++, index_word = 0;
-      }
-      index_line++;
-    }
-    word_order = 1, index_line = 0, line_order++;
-  }
-  fclose(file);
-  printf("Student details added successfully!\n");
-}
-
 uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
                   TYPE_IN_FILE studen_order) {
-
+  // trash: remove the code, use strtol directly
+  // solved: date: 2022-04-21 07:44:32
   if (order <= 0 || order > COURSE_LENGTH + ITEMS_BEFORE_COURSE)
     return 2;
   switch (order) {
     case 1:
-    // bug: everyting returns 0 lol.
-      if (0 == (atoi(students->rollnum))) {
+      // urgent: have to fix by thursday.
+      // bug: everyting returns 0 lol.
+      // fix: use strtol
+      // memo: wasn't atoi issue, used wrong inputs.
+      // solved: date: 2022-04-21 07:05:15
+      if (0 >= strtol(src, NULL, 10)) {
         printf("roll number must be digit\n");
         return 3;
       }

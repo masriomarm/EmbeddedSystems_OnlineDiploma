@@ -11,8 +11,7 @@
 
 #include "main.h"
 
-//[p]: enter student details manually
-void read_manual(void) {
+void read_file() {
   TYPE_IN_FILE line[MAX_LINE_LENGTH] = {0};
   uint8_t      index_line            = 0;
   uint8_t      line_order            = 0;
@@ -20,10 +19,18 @@ void read_manual(void) {
   uint8_t      index_word            = 0;
   uint8_t      word_order            = 1;
 
-  char flag = 'n';
+  // Open file
+  FILE *file = fopen(FILE_NAME_PRJ2, "r");
+  if (!file) {
+    perror(FILE_NAME_PRJ2);
+    return;
+  }
 
-  do {
-    fgets(line, MAX_LINE_LENGTH, stdin);
+  // Get each line until there are none left
+  // extract words from each line
+  // assign each word to its correspending
+
+  while (fgets(line, MAX_LINE_LENGTH, file)) {
     while (line[index_line] != '\n') {
       if (line[index_line] != ' ') { // get word
         word[index_word++] = line[index_line];
@@ -31,8 +38,10 @@ void read_manual(void) {
       if ((line[index_line] == ' ' && index_word > 0) ||
           (line[index_line + 1] == '\n' &&
            index_word > 0)) { // dump word if next char is space or newline.
-        if (1 ==
-            map_words(word_order, word, &(students[line_order]), line_order)) { // bug: rollnum should only be digit.
+        if (3 == map_words(word_order, word, &(students[line_order]), line_order)) {
+          continue;
+        }
+        if (1 == map_words(word_order, word, &(students[line_order]), line_order)) {
           line_order--;
         }
         memset(word, 0, sizeof(word)); // reset word to receive next word
@@ -41,16 +50,48 @@ void read_manual(void) {
       index_line++;
     }
     word_order = 1, index_line = 0, line_order++;
-    printf("Student details added successfully!\n");
-    printf("\nContinue? y or n\n");
-    // bug: extra newline is added automatically, maybe due to fgets.
-    fgets(&flag, 1, stdin);
-  } while (flag == 'y' || flag == 'Y');
+  }
+  fclose(file);
+  printf("Student details added successfully!\n");
+}
 
-  ;
+//[p]: enter student details manually
+void read_manual(void) {
+  TYPE_IN_FILE   line[MAX_LINE_LENGTH] = {0};
+  uint8_t        index_line            = 0;
+  static uint8_t line_order            = 0;
+  TYPE_IN_FILE   word[MAX_WORD_LENGTH] = {0};
+  uint8_t        index_word            = 0;
+  uint8_t        word_order            = 1;
+
+  if (line_order >= MAX_STUDENT_NUM) {
+    printf("Buffer full...");
+    return;
+  }
+
+  fgets(line, MAX_LINE_LENGTH, stdin);
+  while (line[index_line] != '\n') {
+    if (line[index_line] != ' ') { // get word
+      word[index_word++] = line[index_line];
+    }
+    if ((line[index_line] == ' ' && index_word > 0) ||
+        (line[index_line + 1] == '\n' &&
+         index_word > 0)) { // dump word if next char is space or newline.
+      if (1 == map_words(word_order, word, &(students[line_order]),
+                         line_order)) { // bug: rollnum should only be digit.
+        line_order--;
+      }
+      memset(word, 0, sizeof(word)); // reset word to receive next word
+      word_order++, index_word = 0;
+    }
+    index_line++;
+  }
+  line_order++;
+
+  printf("Student details added successfully!\n");
 };
 
-//[p]: search students by roll num, print details
+//[w]: search students by roll num, print details
 void find_rollnum(void){
 
 };
