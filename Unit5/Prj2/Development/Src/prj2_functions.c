@@ -26,25 +26,24 @@ void read_file() {
     return;
   }
 
-  // Get each line until there are none left
-  // extract words from each line
-  // assign each word to its correspending
-
   while (fgets(line, MAX_LINE_LENGTH, file)) {
     while (line[index_line] != '\n') {
-      if (line[index_line] != ' ') { // get word
+      if (line[index_line] != ' ') {
         word[index_word++] = line[index_line];
       }
       if ((line[index_line] == ' ' && index_word > 0) ||
           (line[index_line + 1] == '\n' &&
-           index_word > 0)) { // dump word if next char is space or newline.
-        if (3 == map_words(word_order, word, &(students[line_order]), line_order)) {
+           index_word > 0)) {
+
+        uint8_t retval =
+            map_words(word_order, word, &(students[line_order]), line_order);
+        if (3 == retval) {
           continue;
         }
-        if (1 == map_words(word_order, word, &(students[line_order]), line_order)) {
+        if (1 == retval) {
           line_order--;
         }
-        memset(word, 0, sizeof(word)); // reset word to receive next word
+        memset(word, 0, sizeof(word));
         word_order++, index_word = 0;
       }
       index_line++;
@@ -55,7 +54,7 @@ void read_file() {
   printf("Student details added successfully!\n");
 }
 
-//[p]: enter student details manually
+//[d]: enter student details manually
 void read_manual(void) {
   TYPE_IN_FILE   line[MAX_LINE_LENGTH] = {0};
   uint8_t        index_line            = 0;
@@ -77,8 +76,12 @@ void read_manual(void) {
     if ((line[index_line] == ' ' && index_word > 0) ||
         (line[index_line + 1] == '\n' &&
          index_word > 0)) { // dump word if next char is space or newline.
-      if (1 == map_words(word_order, word, &(students[line_order]),
-                         line_order)) { // bug: rollnum should only be digit.
+      uint8_t retval =
+          map_words(word_order, word, &(students[line_order]), line_order);
+      if (3 == retval) {
+        continue;
+      }
+      if (1 == retval) {
         line_order--;
       }
       memset(word, 0, sizeof(word)); // reset word to receive next word
@@ -91,7 +94,7 @@ void read_manual(void) {
   printf("Student details added successfully!\n");
 };
 
-//[w]: search students by roll num, print details
+//[in progress]: search students by roll num, print details
 void find_rollnum(void){
 
 };
@@ -106,9 +109,15 @@ void find_coureid(void){
 
 };
 
-//[p]: return total number of students
-void totalnum_student(void){
+//[d ]: return total number of students
+void totalnum_student(void) {
+  volatile uint8_t current = 0;
 
+  while (atoi(students[current].rollnum) != 0) {
+    current++;
+  }
+
+  printf("Total number of students is: %d\n", current);
 };
 
 //[p]: delete student with the following roll num
@@ -143,6 +152,6 @@ void show_all(void) {
 
 //[d]: exit all
 void exit_all(void) {
-  printf("Exit...");
+  printf("Exit...\n");
   exit(0);
 };

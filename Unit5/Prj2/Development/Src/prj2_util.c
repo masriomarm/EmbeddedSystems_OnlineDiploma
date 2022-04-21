@@ -15,17 +15,10 @@
 
 uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
                   TYPE_IN_FILE studen_order) {
-  // trash: remove the code, use strtol directly
-  // solved: date: 2022-04-21 07:44:32
   if (order <= 0 || order > COURSE_LENGTH + ITEMS_BEFORE_COURSE)
     return 2;
   switch (order) {
     case 1:
-      // urgent: have to fix by thursday.
-      // bug: everyting returns 0 lol.
-      // fix: use strtol
-      // memo: wasn't atoi issue, used wrong inputs.
-      // solved: date: 2022-04-21 07:05:15
       if (0 >= strtol(src, NULL, 10)) {
         printf("roll number must be digit\n");
         return 3;
