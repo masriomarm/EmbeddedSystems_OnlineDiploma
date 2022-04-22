@@ -68,6 +68,7 @@ void read_manual(void) {
     return;
   }
 
+  printf("Enter student details... \n");
   fgets(line, MAX_LINE_LENGTH, stdin);
   while (line[index_line] != '\n') {
     if (line[index_line] != ' ') { // get word
@@ -94,9 +95,23 @@ void read_manual(void) {
   printf("Student details added successfully!\n");
 };
 
-//[in progress]: search students by roll num, print details
+//[done]: search students by roll num, print details
 void find_rollnum(void){
+  int roll = digit_input("Enter roll number to be found: ");
+  printf("\nSearching roll number %d ...\n",roll);
 
+  uint8_t indx = 0;
+  for(size_t i = 0; i < MAX_STUDENT_NUM; i++){
+    if ((atoi(students[i].rollnum)) == roll)
+    {
+      indx = i;
+      printf("found ...\n");
+      student_show(indx);
+      return;
+    }
+  }
+
+  printf("No match for Roll number %d ...\n",roll);
 };
 
 //[p]: search students by first name, print details
@@ -109,7 +124,7 @@ void find_coureid(void){
 
 };
 
-//[d ]: return total number of students
+//[d]: return total number of students
 void totalnum_student(void) {
   volatile uint8_t current = 0;
 

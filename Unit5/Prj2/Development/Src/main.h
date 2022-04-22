@@ -28,7 +28,7 @@ typedef struct S_StduentData {
 extern student_data_t students[MAX_STUDENT_NUM];
 
 #include "prj2_functions.h"
-#include "read_file.h"
+#include "prj2_util.h"
 
 void read_file(void);
 void read_manual(void);
