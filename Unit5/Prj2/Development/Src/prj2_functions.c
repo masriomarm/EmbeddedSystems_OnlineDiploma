@@ -10,7 +10,7 @@
  */
 
 #include "main.h"
-
+//[done]: read data from ./data.txt file
 void read_file() {
   TYPE_IN_FILE line[MAX_LINE_LENGTH] = {0};
   uint8_t      index_line            = 0;
@@ -32,8 +32,7 @@ void read_file() {
         word[index_word++] = line[index_line];
       }
       if ((line[index_line] == ' ' && index_word > 0) ||
-          (line[index_line + 1] == '\n' &&
-           index_word > 0)) {
+          (line[index_line + 1] == '\n' && index_word > 0)) {
 
         uint8_t retval =
             map_words(word_order, word, &(students[line_order]), line_order);
@@ -54,7 +53,7 @@ void read_file() {
   printf("Student details added successfully!\n");
 }
 
-//[d]: enter student details manually
+//[done]: enter student details manually
 void read_manual(void) {
   TYPE_IN_FILE   line[MAX_LINE_LENGTH] = {0};
   uint8_t        index_line            = 0;
@@ -68,6 +67,13 @@ void read_manual(void) {
     return;
   }
 
+  uint8_t indx = 0;
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if ((atoi(students[i].rollnum)) == 0) {
+      indx = i;
+    }
+  }
+
   printf("Enter student details... \n");
   fgets(line, MAX_LINE_LENGTH, stdin);
   while (line[index_line] != '\n') {
@@ -77,33 +83,29 @@ void read_manual(void) {
     if ((line[index_line] == ' ' && index_word > 0) ||
         (line[index_line + 1] == '\n' &&
          index_word > 0)) { // dump word if next char is space or newline.
-      uint8_t retval =
-          map_words(word_order, word, &(students[line_order]), line_order);
+      uint8_t retval = map_words(word_order, word, &(students[indx]), indx);
       if (3 == retval) {
         continue;
       }
       if (1 == retval) {
-        line_order--;
+        indx--;
       }
       memset(word, 0, sizeof(word)); // reset word to receive next word
       word_order++, index_word = 0;
     }
     index_line++;
   }
-  line_order++;
-
-  printf("Student details added successfully!\n");
+  indx++;
 };
 
 //[done]: search students by roll num, print details
-void find_rollnum(void){
+void find_rollnum(void) {
   int roll = digit_input("Enter roll number to be found: ");
-  printf("\nSearching roll number %d ...\n",roll);
+  printf("\nSearching roll number %d ...\n", roll);
 
   uint8_t indx = 0;
-  for(size_t i = 0; i < MAX_STUDENT_NUM; i++){
-    if ((atoi(students[i].rollnum)) == roll)
-    {
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if ((atoi(students[i].rollnum)) == roll) {
       indx = i;
       printf("found ...\n");
       student_show(indx);
@@ -111,7 +113,7 @@ void find_rollnum(void){
     }
   }
 
-  printf("No match for Roll number %d ...\n",roll);
+  printf("No match for Roll number %d ...\n", roll);
 };
 
 //[p]: search students by first name, print details
@@ -124,7 +126,7 @@ void find_coureid(void){
 
 };
 
-//[d]: return total number of students
+//[done]: return total number of students
 void totalnum_student(void) {
   volatile uint8_t current = 0;
 
@@ -135,37 +137,59 @@ void totalnum_student(void) {
   printf("Total number of students is: %d\n", current);
 };
 
-//[p]: delete student with the following roll num
-void delete_rollnum(void){
+//[done]: delete student with the following roll num
+void delete_rollnum(void) {
+  int roll = digit_input("Enter roll number to be deleted: ");
+  printf("\nSearching roll number %d ...\n", roll);
 
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if ((atoi(students[i].rollnum)) == roll) {
+      printf("found ...\n");
+      memset(&students[i], 0, sizeof(students[i]));
+      return;
+    }
+  }
+
+  printf("No match for Roll number %d ...\n", roll);
 };
 
-//[p]: update student with the following roll num
-void update_rollnum(void){
+//[done]: update student with the following roll num
+void update_rollnum(void) {
+  int roll = digit_input("Enter roll number to be updated: ");
+  printf("\nSearching roll number %d ...\n", roll);
 
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if ((atoi(students[i].rollnum)) == roll) {
+      printf("found ...\n");
+      memset(&students[i], 0, sizeof(students[i]));
+      read_manual();
+      return;
+    }
+  }
+
+  printf("No match for Roll number %d ...\n", roll);
 };
 
-//[d]: show all students
+//[done]: show all students
 /**
  * @brief print student details until the first null student.
  *
  */
 void show_all(void) {
+  for (int i = 0; i < MAX_STUDENT_NUM; i++) {
+    if (atoi(students[i].rollnum) != 0) {
+      printf("Student [%d]\n%s %s, Roll Number: %s, Courses:\n", i + 1,
+             students[i].name_first, students[i].name_last,
+             students[i].rollnum);
 
-  uint8_t current = 0;
-  do {
-    printf("Student [%d]\n%s %s, Roll Number: %s, Courses:\n", current + 1,
-           students[current].name_first, students[current].name_last,
-           students[current].rollnum);
-
-    printf("%s\t%s\t%s\t%s\t%s\n", students[current].course[0],
-           students[current].course[1], students[current].course[2],
-           students[current].course[3], students[current].course[4]);
-    current++;
-  } while (atoi(students[current].rollnum) != 0);
+      printf("%s\t%s\t%s\t%s\t%s\n", students[i].course[0],
+             students[i].course[1], students[i].course[2],
+             students[i].course[3], students[i].course[4]);
+    }
+  }
 };
 
-//[d]: exit all
+//[done]: exit all
 void exit_all(void) {
   printf("Exit...\n");
   exit(0);

@@ -28,9 +28,9 @@ void init(void) {
     state_ptr_main = ReceivingPressureVal;
     AlarmFlag      = 0;
 }
-//[d]: implement states according to design
+//[done]: implement states according to design
 
-//[d]: high pressure state
+//[done]: high pressure state
 
 /// represent state where pressure value is above or equal threshold
 STATE(HighPressure) {
@@ -44,7 +44,7 @@ STATE(HighPressure) {
     /// switch state
     state_ptr_main = ReceivingPressureVal;
 }
-//[d]: safe pressure state
+//[done]: safe pressure state
 /// represent state where pressure value is below threshold
 STATE(SafePressure) {
     /// stop alarm
@@ -54,7 +54,7 @@ STATE(SafePressure) {
     /// switch state
     state_ptr_main = ReceivingPressureVal;
 }
-//[d]: receiving pressure state
+//[done]: receiving pressure state
 /// represent state where pressure value is being measured
 STATE(ReceivingPressureVal) {
     /// read pressure value

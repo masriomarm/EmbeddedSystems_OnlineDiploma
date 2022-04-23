@@ -11,7 +11,7 @@
 
 #include "main.h"
 
-//[d]: read from file and map data.
+//[done]: read from file and map data.
 
 uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
                   TYPE_IN_FILE studen_order) {
@@ -21,7 +21,7 @@ uint8_t map_words(TYPE_IN_FILE order, const char *src, student_data_t *dest_S,
   switch (order) {
     case 1:
       if (0 >= strtol(src, NULL, 10)) {
-        printf("roll number must be digit\n");
+        printf("roll number must be digit greater than 0\n");
         return 3;
       }
       if (rollnum_fail(src, dest_S, studen_order)) {

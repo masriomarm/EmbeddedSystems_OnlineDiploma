@@ -51,7 +51,7 @@ inline int ListEmpty (struct Sstudent* head)
 }
 
 
-// [d]:get the nth node'98456u8i90olp-;[\]
+// [done]:get the nth node'98456u8i90olp-;[\]
 int findIndex(void)
 {
 	IsListEmpty
@@ -96,7 +96,7 @@ int findIndex(void)
 
 }
 
-// [d]:count number of node
+// [done]:count number of node
 int CountNodes(void)
 {
 	IsListEmpty
@@ -112,7 +112,7 @@ int CountNodes(void)
 	return count;
 }
 
-// [d]:get the nth node from the end.
+// [done]:get the nth node from the end.
 // use 2 ptr with detr space = nth node
 int NthFromEnd(void)
 {
@@ -156,7 +156,7 @@ int NthFromEnd(void)
 	printf("\n height: %0.2f", tempptr->student.height);
 }
 
-// [d]:find the middle of linked list.
+// [done]:find the middle of linked list.
 //  use 2 ptr, one with speed 1x, other with 2x
 //  by the time 2x at the end, 1x shouold be at middle. FAKES, count instead. issues with memory boundary incase of ptr->next->next.
 int GetMiddleNode(void)
@@ -178,7 +178,7 @@ int GetMiddleNode(void)
 	printf("\n height: %0.2f", tempptr->student.height);
 }
 
-// [d]:reverse list
+// [done]:reverse list
 int ReverseList(void)
 {
 	IsListEmpty
