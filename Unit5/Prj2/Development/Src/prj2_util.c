@@ -68,7 +68,7 @@ void student_show(uint8_t indx) {
 
 int digit_input(const char *txt) {
   printf("%s", txt);
-  char temp[3];
+  char temp[5];
   fgets(temp, sizeof(temp), stdin);
   return atoi(temp);
 }

@@ -36,14 +36,14 @@ void read_file() {
 
         uint8_t retval =
             map_words(word_order, word, &(students[line_order]), line_order);
-        if (3 == retval) {
-          continue;
-        }
-        if (1 == retval) {
-          line_order--;
-        }
         memset(word, 0, sizeof(word));
         word_order++, index_word = 0;
+        if (3 == retval) {
+          break;
+        }
+        if (1 == retval) {
+          break;
+        }
       }
       index_line++;
     }
@@ -71,6 +71,7 @@ void read_manual(void) {
   for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
     if ((atoi(students[i].rollnum)) == 0) {
       indx = i;
+      break;
     }
   }
 
@@ -85,10 +86,10 @@ void read_manual(void) {
          index_word > 0)) { // dump word if next char is space or newline.
       uint8_t retval = map_words(word_order, word, &(students[indx]), indx);
       if (3 == retval) {
-        continue;
+        break;
       }
       if (1 == retval) {
-        indx--;
+        break;
       }
       memset(word, 0, sizeof(word)); // reset word to receive next word
       word_order++, index_word = 0;
@@ -116,14 +117,50 @@ void find_rollnum(void) {
   printf("No match for Roll number %d ...\n", roll);
 };
 
-//[p]: search students by first name, print details
-void find_firstname(void){
+//[done]: search students by first name, print details
+void find_firstname(void) {
+  char temp[NAME_FIRST_LENGTH] = {0};
+  printf("\nEnter student first name to find: ");
+  fgets(temp, NAME_FIRST_LENGTH, stdin);
 
+  uint8_t indx = 0;
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if (!(strncmp(students[i].name_first, temp, strlen(temp) - 1))) {
+      indx = i;
+      printf("found ...\n");
+      student_show(indx);
+      return;
+    }
+  }
+
+  printf("\n%s not found", temp);
 };
 
-//[p]: search students by course id, print details
-void find_coureid(void){
+//[done]: search students by course id, print details
+void find_course_id(void) {
+  int temp = digit_input("\nEtner course id to find students enrolled: ");
 
+  size_t i = 0;
+  for (i = 0; i < MAX_STUDENT_NUM; i++) {
+    for (size_t course_index = 0; course_index < COURSE_LENGTH;
+         course_index++) {
+      if (atoi(students[i].rollnum) == 0) {
+        continue;
+      }
+
+      if (temp == atoi(students[i].course[course_index])) {
+        printf("found ...\n");
+        student_show(i);
+        break;
+      }
+    }
+
+    if (i == MAX_STUDENT_NUM - 1) {
+      return;
+    }
+  }
+
+  printf("\nNo match for course id %d ...", temp);
 };
 
 //[done]: return total number of students

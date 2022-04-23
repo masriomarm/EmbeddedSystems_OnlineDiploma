@@ -15,7 +15,7 @@ student_data_t students[MAX_STUDENT_NUM];
 #define FCNS_COUNT 10
 void (*const FcnPtr[FCNS_COUNT])(void) = {
     read_manual,  read_file,        find_rollnum,   find_firstname,
-    find_coureid, totalnum_student, delete_rollnum, update_rollnum,
+    find_course_id, totalnum_student, delete_rollnum, update_rollnum,
     show_all,     exit_all};
 
 #define BUF 3
