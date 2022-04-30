@@ -4,6 +4,7 @@
 
 *~
 *.txt
+!CMakeLists.txt
 *.swo
 *.swp
 *.fuse*
@@ -26,6 +27,7 @@ doxyfile
 
 
 build/
+debug/
 test/
 latex/
 man/

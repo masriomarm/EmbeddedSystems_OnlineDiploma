@@ -26,6 +26,13 @@ void read_file() {
     return;
   }
 
+  for (size_t i = 0; i < MAX_STUDENT_NUM; i++) {
+    if ((atoi(students[i].rollnum)) == 0) {
+      line_order = i;
+      break;
+    }
+  }
+
   while (fgets(line, MAX_LINE_LENGTH, file)) {
     while (line[index_line] != '\n') {
       if (line[index_line] != ' ') {

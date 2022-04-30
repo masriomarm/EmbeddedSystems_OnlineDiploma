@@ -1,8 +1,10 @@
 #ifndef PRJ2_UTIL_H_
 #define PRJ2_UTIL_H_
 
-#define FILE_NAME_PRJ2 "data.txt"
+#define FILE_NAME_PRJ2 "../data/data.txt"
 #define TYPE_IN_FILE   char
+
+#include "main.h"
 
 uint8_t map_words(char, const char *, student_data_t *, char);
 uint8_t rollnum_fail(const char *, student_data_t *, char);
