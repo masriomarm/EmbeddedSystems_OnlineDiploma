@@ -10,11 +10,11 @@ target:
 	@echo "build successfull... Alhamdulillah"
 
 cleanbuild:
-	cd build/ && rm -r *
+	rm -r build
 
 cleanall:
 	rm -r debug
-	cd build/ && rm -r *
+	rm -r build
 
 run:
 	cd debug/ && ./${TARG}

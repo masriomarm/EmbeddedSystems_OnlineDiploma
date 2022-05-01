@@ -1,0 +1,5 @@
+run make to build,
+output bin should be at debug/
+data.txt should be at data/ to read from file.
+run make cleanbuild to remove build/
+run make cleanall to remove build/ debug/
