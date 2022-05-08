@@ -20,7 +20,7 @@ cleanbuild:
 	rm -r build
 
 cleanall:
-	rm -r debug || rm -r build
+	rm -r debug build
 
 run:
 	cd debug/ && ./${TARG}
