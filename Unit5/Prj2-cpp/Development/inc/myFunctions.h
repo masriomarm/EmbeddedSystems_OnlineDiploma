@@ -2,6 +2,10 @@
 #define MYFUNCTIONS_H_
 
 #include "main.h"
+
+class S_StduentData;
+typedef std::vector<S_StduentData> student_vector;
+
 namespace prj2 {
 
 void read_manual(student_vector &vect);

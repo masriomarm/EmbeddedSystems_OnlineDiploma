@@ -26,10 +26,11 @@ int main() {
 
   std::array<std::function<void(student_vector &)>, 10> mode{
       prj2::read_manual, prj2::read_file, prj2::find_rollnum,
-      prj2::find_firstname, prj2::show_all};
+      prj2::find_firstname, prj2::find_course, prj2::show_all};
 
   mode[1](v_stdudents);
   mode[3](v_stdudents);
+  mode[4](v_stdudents);
 
 /*   for (auto it : v_stdudents) {
     it.get_student();

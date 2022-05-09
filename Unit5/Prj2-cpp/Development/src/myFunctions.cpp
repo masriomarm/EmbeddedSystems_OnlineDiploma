@@ -26,7 +26,7 @@ void prj2::find_firstname(student_vector &vect) {
     it = std::find_if(it, vect.end(), [&tofind](const S_StduentData &lhs) {
       return lhs.get_name_first() == tofind;
     });
-    if (it != vect.end()){
+    if (it != vect.end()) {
       it->get_student();
       ++it;
     }
@@ -38,9 +38,19 @@ void prj2::find_course(student_vector &vect) {
   std::string tofind;
   std::cout << "enter name to be found: ";
   std::cin >> tofind;
-  (std::find_if(vect.begin(), vect.end(), [&tofind](const S_StduentData &lhs) {
-    return lhs.get_name_first() == tofind;
-  }))->get_student();
+
+  bool found = false;
+  for (auto it : vect) {
+    for (size_t i = 0; i < COURSE_LENGTH; i++) {
+      if (it.course[i] == tofind) {
+        it.get_student();
+        found = true;
+      }
+    }
+    if (!found && it.rollnum == vect.at(vect.size() - 1).rollnum) {
+      std::cout << tofind << " not found\n";
+    }
+  }
 }
 
 void prj2::find_rollnum(student_vector &vect) {
