@@ -25,28 +25,43 @@ int main() {
   auto it_vec_student = v_stdudents.begin();
 
   std::array<std::function<void(student_vector &)>, 10> mode{
-      prj2::read_manual, prj2::read_file, prj2::find_rollnum,
-      prj2::find_firstname, prj2::find_course, prj2::show_all};
+      prj2::read_manual,    prj2::read_file,   prj2::find_rollnum,
+      prj2::find_firstname, prj2::find_course, prj2::find_total,
+      prj2::delete_rollnum, prj2::show_all};
 
-  mode[1](v_stdudents);
-  mode[3](v_stdudents);
-  mode[4](v_stdudents);
+  std::cout << "\tWelcome to student management";
 
-/*   for (auto it : v_stdudents) {
-    it.get_student();
-  }
+  prj2::Disp_Options();
 
-  std::sort(v_stdudents.rbegin(), v_stdudents.rend(),
-            [](const S_StduentData &lhs, const S_StduentData &rhs) {
-              return std::stod(lhs.get_gpa()) < std::stod(rhs.get_gpa());
-            });
-  for (auto it : v_stdudents) {
-    it.get_student();
-  }
+  // mode[1](v_stdudents);
+  // mode[3](v_stdudents);
+  // mode[4](v_stdudents);
+/*   int option{0};
+  std::cin >> option;
+  mode[option-1](v_stdudents);
+  std::cin >> option;
+  mode[option-1](v_stdudents);
+  std::cin >> option;
+  mode[option-1](v_stdudents);
+  std::cin >> option;
+  mode[option-1](v_stdudents);
+  std::cin >> option;
+  mode[option-1](v_stdudents); */
+  /*   for (auto it : v_stdudents) {
+      it.get_student();
+    }
 
-  std::sort(v_stdudents.begin(), v_stdudents.end());
-  for (auto it : v_stdudents) {
-    it.get_student();
-  }
-  std::cout << "\n"; */
+    std::sort(v_stdudents.rbegin(), v_stdudents.rend(),
+              [](const S_StduentData &lhs, const S_StduentData &rhs) {
+                return std::stod(lhs.get_gpa()) < std::stod(rhs.get_gpa());
+              });
+    for (auto it : v_stdudents) {
+      it.get_student();
+    }
+
+    std::sort(v_stdudents.begin(), v_stdudents.end());
+    for (auto it : v_stdudents) {
+      it.get_student();
+    }
+    std::cout << "\n"; */
 }

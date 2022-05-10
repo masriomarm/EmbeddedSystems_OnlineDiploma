@@ -53,9 +53,13 @@ void prj2::find_course(student_vector &vect) {
   }
 }
 
+void prj2::find_total(student_vector &vect){
+  std::cout << "number of students = " << vect.size();
+}
+
 void prj2::find_rollnum(student_vector &vect) {
   std::string tofind;
-  std::cout << "enter name to be found: ";
+  std::cout << "enter roll number to be found: ";
   std::cin >> tofind;
   (std::find_if(vect.begin(), vect.end(), [&tofind](const S_StduentData &lhs) {
     return lhs.get_rollnum() == tofind;
@@ -82,6 +86,21 @@ void prj2::read_file(student_vector &vect) {
                   << " is already taken!\n";
       }
     }
+  }
+}
+
+void prj2::delete_rollnum(student_vector &vect) {
+  std::string tofind;
+  std::cout << "enter roll number to be deleted: ";
+  std::cin >> tofind;
+
+  auto it = std::find_if(vect.begin(),vect.end(),[&tofind](const S_StduentData& lhs){ return lhs.get_rollnum() == tofind;});
+
+  if(it !=vect.end()){
+    std::cout << "found, deleting\n";
+    vect.erase(it);
+    vect.shrink_to_fit();
+    std::cout << "done!\n";
   }
 }
 

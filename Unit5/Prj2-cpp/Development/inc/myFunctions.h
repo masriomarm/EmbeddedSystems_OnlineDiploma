@@ -15,6 +15,8 @@ void read_file(student_vector &vect);
 void show_all(student_vector &vect);
 void Disp_Options(void);
 void find_course(student_vector &vect);
+void find_total(student_vector &vect);
+void delete_rollnum(student_vector &vect);
 
 // [p]: impelemnt find course
 // pending: delete student with roll num
