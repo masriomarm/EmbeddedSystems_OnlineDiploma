@@ -3,5 +3,6 @@
 
 #include "student.h"
 #include "myFunctions.h"
+#include <cassert>
 
 #endif ///< MAIN_H_

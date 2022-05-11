@@ -12,41 +12,35 @@
 #include "../inc/main.h"
 
 int main() {
-  char    line[MAX_LINE_LENGTH] = {0};
-  uint8_t index_line            = 0;
-  uint8_t line_order            = 0;
-  char    word[MAX_WORD_LENGTH] = {0};
-  uint8_t index_word            = 0;
-  uint8_t word_order            = 1;
 
   student_vector v_stdudents;
-  student_data_t temp_student;
 
-  auto it_vec_student = v_stdudents.begin();
-
-  std::array<std::function<void(student_vector &)>, 10> mode{
-      prj2::read_manual,    prj2::read_file,   prj2::find_rollnum,
-      prj2::find_firstname, prj2::find_course, prj2::find_total,
-      prj2::delete_rollnum, prj2::show_all};
+  std::array<std::function<void(student_vector &)>, NUM_MODES> mode{
+      prj2::read_manual,    prj2::read_file,      prj2::find_rollnum,
+      prj2::find_firstname, prj2::find_course,    prj2::find_total,
+      prj2::delete_rollnum, prj2::update_rollnum, prj2::show_all,
+      prj2::terminate};
 
   std::cout << "\tWelcome to student management";
-
-  prj2::Disp_Options();
+  do {
+    prj2::Disp_Options();
+    prj2::operation(mode,v_stdudents);
+  } while (1);
 
   // mode[1](v_stdudents);
   // mode[3](v_stdudents);
   // mode[4](v_stdudents);
-/*   int option{0};
-  std::cin >> option;
-  mode[option-1](v_stdudents);
-  std::cin >> option;
-  mode[option-1](v_stdudents);
-  std::cin >> option;
-  mode[option-1](v_stdudents);
-  std::cin >> option;
-  mode[option-1](v_stdudents);
-  std::cin >> option;
-  mode[option-1](v_stdudents); */
+  /*   int option{0};
+    std::cin >> option;
+    mode[option-1](v_stdudents);
+    std::cin >> option;
+    mode[option-1](v_stdudents);
+    std::cin >> option;
+    mode[option-1](v_stdudents);
+    std::cin >> option;
+    mode[option-1](v_stdudents);
+    std::cin >> option;
+    mode[option-1](v_stdudents); */
   /*   for (auto it : v_stdudents) {
       it.get_student();
     }

@@ -44,7 +44,6 @@ public:
 
   bool operator<(const S_StduentData &obj) const;
 
-
   friend void prj2::find_course(student_vector &vect);
 
   bool unique_rollnum(const std::vector<S_StduentData> &vect);

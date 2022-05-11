@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+constexpr int NUM_MODES{10};
+
 class S_StduentData;
 typedef std::vector<S_StduentData> student_vector;
 
@@ -17,12 +19,11 @@ void Disp_Options(void);
 void find_course(student_vector &vect);
 void find_total(student_vector &vect);
 void delete_rollnum(student_vector &vect);
-
-// [p]: impelemnt find course
-// pending: delete student with roll num
-// [p]: update student with roll num
-// [p]: find total number of students
-// [p]: quit function
+void update_rollnum(student_vector &vect);
+void terminate(student_vector &vect);
+void operation(
+    std::array<std::function<void(student_vector &)>, NUM_MODES> mode,
+    student_vector                                              &vect);
 
 } // namespace prj2
 
