@@ -55,6 +55,8 @@ public:
   void get_student(void);
   void map_line(std::string);
 
+  bool push_to(std::vector<S_StduentData> &vect);
+
   std::string get_rollnum(void) const;
   std::string get_name_first(void) const;
   std::string get_gpa(void) const;

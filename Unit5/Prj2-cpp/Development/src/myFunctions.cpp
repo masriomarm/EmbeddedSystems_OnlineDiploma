@@ -4,16 +4,7 @@ void prj2::read_manual(student_vector &vect) {
 
   student_data_t temp_student;
   temp_student.data_set();
-  if (vect.size() == 0 && temp_student.valid_rollnum()) {
-    vect.push_back(temp_student);
-    return;
-  } else {
-    if (temp_student.valid_rollnum() && temp_student.unique_rollnum(vect)) {
-      vect.push_back(temp_student);
-    } else {
-      std::cout << " roll num is already taken!\n";
-    }
-  }
+  temp_student.push_to(vect);
 }
 
 void prj2::find_firstname(student_vector &vect) {
@@ -76,15 +67,7 @@ void prj2::read_file(student_vector &vect) {
     student_data_t temp;
     for (std::string str; std::getline(inpfile, str);) {
       temp.map_line(str);
-      if (vect.size() == 0 ||
-          (temp.valid_rollnum() && temp.unique_rollnum(vect))) {
-        vect.push_back(temp);
-        std::cout << "roll num " << temp.get_rollnum()
-                  << " added successfully!\n";
-      } else {
-        std::cout << "roll num " << temp.get_rollnum()
-                  << " is already taken!\n";
-      }
+      temp.push_to(vect);
     }
   }
 }
@@ -102,7 +85,6 @@ void prj2::delete_rollnum(student_vector &vect) {
   if (it != vect.end()) {
     std::cout << "found, deleting\n";
     vect.erase(it);
-    vect.shrink_to_fit();
     std::cout << "done!\n";
   }
 }
@@ -127,11 +109,8 @@ void prj2::update_rollnum(student_vector &vect) {
     std::cout << "found,\n";
     student_data_t temp;
     temp.data_set();
-    if (temp.valid_rollnum() && temp.unique_rollnum(vect)) {
+    if (temp.push_to(vect)) {
       vect.erase(it);
-      vect.push_back(temp);
-    }else{
-      std::cout << "roll num is already taken!\n";
     }
   }
 }
@@ -146,6 +125,7 @@ void prj2::operation(
   int option{0};
   std::cin >> option;
   assert(option < NUM_MODES || option > 0);
+  std::cout << "option: " << option << "\n";
   mode[option - 1](vect);
 }
 

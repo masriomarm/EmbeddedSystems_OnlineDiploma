@@ -53,6 +53,18 @@ void S_StduentData::data_set(void) {
       std::ws >> course[2] >> std::ws >> course[3] >> std::ws >> course[4];
 }
 
+bool S_StduentData::push_to(std::vector<S_StduentData> &vect){
+
+  if((this->valid_rollnum() && this->unique_rollnum(vect)) || (0 == vect.size())){
+    vect.push_back(*this);
+    std::cout << "roll num " << this->rollnum << " added successfully!\n";
+    return true;
+  }else{
+    std::cout << "roll number is already taken!\n";
+    return false;
+  }
+}
+
 std::string S_StduentData::get_rollnum(void) const {
   return rollnum;
 }
