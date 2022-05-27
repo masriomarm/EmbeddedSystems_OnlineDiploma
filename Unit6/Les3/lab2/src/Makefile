@@ -45,8 +45,8 @@ $(PrjName).bin: $(PrjName).elf
 	cd $(BuildDir) && $(CC)nm $< >> $(SYMs)_$(PrjName)
 	mkdir $(OutDir) || cd $(OutDir)
 	mv $(BuildDir)$(ASI)_$(PrjName) $(BuildDir)$(ALH)_$(PrjName) $(BuildDir)$(SYMs)_$(PrjName) $(BuildDir)$(MAP) $(OutDir)
-	cp  $(BuildDir)$(PrjName).elf $(OutDir)$(PrjName).elf  
-	cd $(OutDir) && cp  $(PrjName).elf  $(PrjName).axf 
+	cp  $(BuildDir)$(PrjName).elf $(OutDir)$(PrjName).elf
+	cd $(OutDir) && cp  $(PrjName).elf ../$(PrjName).axf
 #	cp -u latex/refman.pdf $(OutDir)
 	cd $(BuildDir) && $(CC)objcopy -O ihex $< $(PrjName).hex
 	cd $(BuildDir) && $(CC)objcopy -O binary $< $@

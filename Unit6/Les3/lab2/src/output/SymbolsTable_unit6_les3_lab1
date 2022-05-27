@@ -1,4 +1,4 @@
-080000c8 t _reset
+080000d4 t _reset
 08000050 T main
-080000d0 D RegODR
-080000ce t Vector_handler
+080000dc D RegODR
+080000da t Vector_handler
