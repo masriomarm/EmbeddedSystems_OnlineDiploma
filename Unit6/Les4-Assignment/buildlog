@@ -1,0 +1,36 @@
+
+------ Build started: Project: XC8Application1, Configuration: Debug AVR ------
+Build started.
+Project "XC8Application1.cproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Compiler.targets" from project "E:\Currently working on\Learn in depth - Embedded systems\VSCode\EmbeddedSystems_OnlineDiploma\Unit6\Les4-Assignment\XC8Application1\XC8Application1\XC8Application1.cproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		Shell Utils Path C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils
+		C:\Program Files (x86)\Atmel\Studio\7.0\shellUtils\make.exe all --jobs 4 --output-sync 
+		Building file: .././main.c
+		Invoking: XC8 C Compiler : 2.31
+		"C:\Program Files\Microchip\xc8\v2.31\bin\xc8-cc.exe"  -mcpu=ATmega32  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\xc8"  -c -x c -funsigned-char -funsigned-bitfields -mext=cci -D__ATmega32__ -DDEBUG  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -MD -MP -MF "main.d" -MT"main.d" -MT"main.o"   -o "main.o" ".././main.c" 
+		Finished building: .././main.c
+		Building target: XC8Application1.elf
+		Invoking:  XC8 C Linker : 2.31
+		"C:\Program Files\Microchip\xc8\v2.31\bin\xc8-cc.exe" -o XC8Application1.elf  main.o   -mcpu=ATmega32  -mdfp="C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\xc8"  -Wl,-Map="XC8Application1.map" -funsigned-char -funsigned-bitfields -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums --memorysummary,memoryfile.xml  
+		Info: Loading file: c:\program files\microchip\xc8\v2.31\avr\avr\bin\../lib\ldscripts/avr5.xn
+		Finished building target: XC8Application1.elf
+		"C:\Program Files\Microchip\xc8\v2.31\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "XC8Application1.elf" "XC8Application1.hex"
+		"C:\Program Files\Microchip\xc8\v2.31\bin\avr-objcopy.exe" -j .eeprom --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0 --no-change-warnings -O ihex "XC8Application1.elf" "XC8Application1.eep" || exit 0
+		"C:\Program Files\Microchip\xc8\v2.31\bin\avr-objdump.exe" -h -S "XC8Application1.elf" > "XC8Application1.lss"
+	Done executing task "RunCompilerTask".
+	Using "RunOutputFileVerifyTask" task from assembly "C:\Program Files (x86)\Atmel\Studio\7.0\Extensions\Application\AvrGCC.dll".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	190 bytes   0.6 % Full
+				Data Memory Usage 		:	0 bytes   0.0 % Full
+				Warning: Memory Usage estimation may not be accurate if there are sections other than .text sections in ELF file
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "XC8Application1.cproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files (x86)\Atmel\Studio\7.0\Vs\Avr.common.targets" from project "E:\Currently working on\Learn in depth - Embedded systems\VSCode\EmbeddedSystems_OnlineDiploma\Unit6\Les4-Assignment\XC8Application1\XC8Application1\XC8Application1.cproj" (entry point):
+Done building target "Build" in project "XC8Application1.cproj".
+Done building project "XC8Application1.cproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
