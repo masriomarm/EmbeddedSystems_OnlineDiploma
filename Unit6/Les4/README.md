@@ -3,7 +3,7 @@
 MCU interrupts, Fri 27 May 2022 19:15:46 EET
 
 > Reqs
->> - ***SysCLK*** *32* MHz, HSI
->> - operate **ABP1** Bus *16*Mhz
->> - operate **APB2** Bus *8*Mhz
->> - operate **AHB** Bus *32*Mhz
+>> - operate PA0 as EXTI0
+>> - disable SWIER
+>> - set EXTI0 mask in NVIC
+>> - toggle PA13 at in EXTI0 handler, rising edge of PA0
