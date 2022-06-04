@@ -43,15 +43,15 @@ int main(void) {
 
   while (1){
     /// read PA1
-    if(((GPIOA_IDR & (1<<1)) >> 1) == 0) /// PA1 pressed, according to HW.
+    if(((GPIOA_IDR) & (1<<1) >> 1) == 0) /// PA1 pressed, according to HW.
     {
       GPIOB_ODR ^= 1 << 1;
-      while (((GPIOA_IDR & (1<<1)) >> 1) == 0); /// single press.
+      while (((GPIOA_IDR) & (1<<1) >> 1) == 0); /// single press.
       // note: consider a flag instead of polling
     }
 
     /// read PA13
-    if(((GPIOA_IDR & (1<<1)) >> 1) == 1) /// PA1 pressed, according to HW.
+    if(((GPIOA_IDR) & (1<<1) >> 1) == 1) /// PA1 pressed, according to HW.
     {
       GPIOB_ODR ^= 1 << 13; /// multi pressing
     }
