@@ -14,7 +14,7 @@ rebuild:
 
 init:
 	@echo "initializing directories, Besm Allah..."
-	mkdir archive data docs inc src test build debug || touch README
+	mkdir -p archive data docs src src/inc/ test build debug && touch README.md && true
 
 cleanbuild:
 	rm -r build

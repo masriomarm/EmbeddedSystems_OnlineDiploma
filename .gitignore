@@ -28,6 +28,7 @@ doxyfile
 *.settings
 
 
+archive/
 build/
 debug/
 test/

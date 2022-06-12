@@ -1,10 +1,12 @@
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR avr)
 
-set(CMAKE_C_COMPILER /usr/bin/avr-gcc)
-set(CMAKE_CXX_COMPILER /usr/bin/avr-g++)
-set(CMAKE_ASM_COMPILER /usr/bin/avr-as)
-set(CMAKE_OBJCOPY /usr/bin/avr-objcopy)
+set(CMAKE_C_COMPILER      avr-gcc)
+set(CMAKE_CXX_COMPILER    avr-g++)
+set(CMAKE_ASM_COMPILER    avr-as)
+set(CMAKE_OBJCOPY         avr-objcopy)
+set(CMAKE_OBJDUMP         avr-objdump)
+set(CMAKE_NM              avr-nm)
 
 
 set(CMAKE_FIND_ROOT_PATH /usr/lib/avr/)
