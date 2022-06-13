@@ -1,59 +1,34 @@
-/*
- * keypad.c
- *
- * Created: 4/22/2021 6:32:10 PM
- *  Author: Marco
- */ 
+/// Omar Elmasri, Mon 13 Jun 2022 03:56:14 EET
+#include "inc/generic.h"
 
+char key_val[4][3]={
+  {'3','2','1'}
+  ,{'6','5','4'}
+  ,{'9','8','7'}
+  ,{'#','0','*'}
+};
 
-#include "keypad.h"
+char Keypad_getkey(void){
+  for(int i= 0; i <4; i++){
+    PORTD &= ~(0b1111 << 0);
+    PORTD |= 1 << i;
+    for(int j =0; j<3; j++){
+      if(RDD_BIT(PIND,j+4)){
+        while(RDD_BIT(PIND,j+4));
+        return key_val[i][j];
+        _delay_ms(10);
+      }
+    }
+  }
 
-int Key_padRow[] = {R0, R1, R2, R3}; //rows of the keypad
-int Key_padCol[] = {C0, C1, C2, C3};//columns
-
-void Keypad_init(){
-	DataDir_KEYPAD_PORT &= ~((1 << R0) | (1 << R1) | (1 << R2) | (1 << R3));
-	DataDir_KEYPAD_PORT |= ((1 << C0) | (1 << C1) | (1 << C2) | (1 << C3));
-	KEYPAD_PORT = 0xFF;
+  return 'A';
 }
 
-char Keypad_getkey(){
-	int i,j;
-	for (i = 0; i < 4; i++){
-		KEYPAD_PORT |= ((1<<Key_padCol[0]) | (1<<Key_padCol[1]) | (1<<Key_padCol[2]) | (1<<Key_padCol[3]));
-		KEYPAD_PORT &= ~(1<<Key_padCol[i]);
-		for(j = 0; j < 4; j++){
-			if (!(keypadPIN & (1 << Key_padRow[j])))
-			{
-				while(!(keypadPIN & (1 << Key_padRow[j])));
-				switch(i){
-					case (0):
-						if (j == 0) return '7';
-						else if (j == 1) return '4';
-						else if (j == 2) return '1';
-						else if (j == 3) return '?';
-						break;
-					case (1):
-						if (j == 0) return '8';
-						else if (j == 1) return '5';
-						else if (j == 2) return '2';
-						else if (j == 3) return '0';
-						break;
-					case (2):
-						if (j == 0) return '9';
-						else if (j == 1) return '6';
-						else if (j == 2) return '3';
-						else if (j == 3) return '=';
-						break;
-					case (3):
-						if (j == 0) return '/';
-						else if (j == 1) return '*';
-						else if (j == 2) return '-';
-						else if (j == 3) return '+';
-						break;
-				}
-			}
-		}
-	}
-	return 'A';
+void Keypad_init(void){
+  DDRD |= (0b1111 << 0);
+  DDRD &= ~(0b111 << 4);
+  PORTD &= ~(0b111 << 4);
 }
+
+
+

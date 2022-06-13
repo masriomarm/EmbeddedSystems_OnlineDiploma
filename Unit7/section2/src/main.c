@@ -5,8 +5,8 @@
  * Author : Marco
  */
 
-#include "lcd.h"
-#include "keypad.h"
+#include "inc/lcd.h"
+#include "inc/keypad.h"
 #include "avr/io.h"
 
 

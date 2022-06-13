@@ -5,7 +5,8 @@
  *  Author: Marco
  */
 
-#include "lcd.h"
+#include "inc/lcd.h"
+#include "inc/generic.h"
 
 void LCD_clear_screen(){
 	LCD_WRITE_COMMAND(LCD_CLEAR_SCREEN);
