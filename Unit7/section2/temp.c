@@ -78,7 +78,7 @@ void LCD_disp(char data) {
   } else {
     LCD_cmd(LCD_CMD_DISP_CLR);
     LCD_cmd(LCD_CMD_CURS_LINE_1);
-    pos = 0;
+    pos = 1;
   }
 }
 
