@@ -7,29 +7,29 @@
 
 #include "inc/lcd.h"
 #include "inc/keypad.h"
-#include "avr/io.h"
 
+void init_GPIO(void);
 
 int main()
 {
 
-	LCD_INIT();
-	Keypad_init();
-	_delay_ms(50);
-	unsigned char key_pressed;
-  DDRC |= 1 << 0;
-  PORTC |= 1 << 0;
-	while(1){
-		key_pressed = Keypad_getkey();
-		switch(key_pressed){
-			case 'A':
-				break;
-			case '?':
-				LCD_clear_screen();
-				break;
-			default:
-				LCD_WRITE_CHAR(key_pressed);
-				break;
-		}
-	}
+  init_GPIO();
+  init_LCD();
+  Keypad_init();
+  char key;
+  while (1) {
+    key = Keypad_getkey();
+    switch (key) {
+      case 'A': break;
+      case '?': LCD_cmd(LCD_CMD_DISP_CLR); break;
+      default: LCD_disp(key); break;
+    }
+  }
+  return 0;
+}
+
+void init_GPIO(void) {
+  DDRA = 0xFF;
+  DDRB |= (0b111 << 0);
+  DDRD = 0x00;
 }
