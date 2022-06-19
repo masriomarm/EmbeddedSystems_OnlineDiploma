@@ -16,6 +16,7 @@ int main()
   init_GPIO();
   init_LCD();
   Keypad_init();
+  char flag = 1;
   char key;
   while (1) {
     key = Keypad_getkey();
@@ -23,6 +24,12 @@ int main()
       case 'A': break;
       case '?': LCD_cmd(LCD_CMD_DISP_CLR); break;
       default: LCD_disp(key); break;
+    }
+    if(key == '5' && flag){
+      LCD_cmd(0x18);
+      LCD_cmd(0x18);
+      LCD_cmd(0x18);
+      flag = 0;
     }
   }
   return 0;
