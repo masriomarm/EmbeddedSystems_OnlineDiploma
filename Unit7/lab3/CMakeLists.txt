@@ -3,11 +3,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/debug)
 message(" output should be at: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 set(PRJ_NAME Unit7_lab3)
-project(${PRJ_NAME})
+project(${PRJ_NAME} C ASM)
 set(SRC_FILES
               src/main.c
-              src/lcd.c
-              src/keypad.c)
+              src/stm32f103c6.c
+              src/startup_stm32f103c6tx.s)
 add_executable(${PRJ_NAME} ${SRC_FILES})
 target_include_directories(${PRJ_NAME} PUBLIC src/inc/)
 

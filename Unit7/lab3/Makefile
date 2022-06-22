@@ -1,4 +1,4 @@
-TARG = avr-section2
+TARG = Uint7_lab3
 
 .PHONY : target cleanall cleanbuild run init rebuild
 target:
@@ -6,7 +6,8 @@ target:
 	mkdir build/ || cd build/
 	mkdir debug/ || cd debug/
 	cd build/ && cmake -DCMAKE_TOOLCHAIN_FILE=../TC-arm.cmake -G "Unix Makefiles" ../
-	cd build && make VERBOSE=1
+#  make  VERBOSE=1
+	cd build && make -s
 	@echo "build successfull... Alhamdulillah"
 
 rebuild:

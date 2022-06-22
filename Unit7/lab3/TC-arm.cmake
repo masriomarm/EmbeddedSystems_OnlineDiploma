@@ -15,11 +15,22 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-set(PRJ_CPU "cortex-m3")
+set(PRJ_CPU "-mcpu=cortex-m3")
 set(PRJ_DEBUG "-g -gdwarf")
 set(PRJ_WARNING "-Wall -Werror")
-set(PRJ_OPTIMIZE " -O0 ")
+set(PRJ_FPU "-mfloat-abi=soft")
+set(PRJ_ISA "-mthumb")
+set(PRJ_SPECS_STRING "-specs=nano.specs")
+set(PRJ_OPTIMIZE "-O0")
+set(PRJ_linker_script ${CMAKE_SOURCE_DIR}/src/STM32F103C6TX_FLASH.ld)
 
-set(CMAKE_C_FLAGS "-mcpu=${PRJ_CPU} ${PRJ_DEBUG} ${PRJ_WARNING}
-${PRJ_OPTIMIZE}")
-set(CMAKE_EXE_LINKER_FLAGS "-Xlinker -Map=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/MapFile.map\"")
+set(CMAKE_C_FLAGS "${PRJ_CPU} \
+${PRJ_DEBUG} \
+${PRJ_WARNING} \
+${PRJ_FPU} \
+${PRJ_ISA} \
+${PRJ_SPECS_STRING} \
+${PRJ_OPTIMIZE} ")
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-Map=\"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/MapFile.map\" \
+-Wl,-T\"${PRJ_linker_script}\" \
+-Wl,--gc-sections ")
