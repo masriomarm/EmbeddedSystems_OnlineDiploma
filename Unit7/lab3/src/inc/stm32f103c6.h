@@ -134,6 +134,14 @@ typedef struct {
 ******************************************************************************/
 
 /*
+                                 Generic Macros
+*/
+#define SET_BIT(reg, bit) ((reg) |= 1 << (bit))
+#define TGL_BIT(reg, bit) ((reg) ^= 1 << (bit))
+#define CLR_BIT(reg, bit) ((reg) &= ~(1 << (bit)))
+#define RDD_BIT(reg, bit) ((reg) & (1 << (bit)))
+
+/*
                                   Clock enable
 */
 #define CLK_EN_GPIOA ((RCC)->APB2EN |= 1 << 2)

@@ -2,6 +2,7 @@
 #define STM32F103C6_GPIO_H_
 /// Author: Omar Elamsri
 #include "stm32f103c6.h"
+#include <stdint.h>
 
 /*
                                 Config structure
@@ -59,10 +60,31 @@ typedef struct {
 #define GPIO_SPEED_10M ((uint16_t)0x0001)
 #define GPIO_SPEED_50M ((uint16_t)0x0001)
 
+/*
+                                 GPIO_PIN_STATE
+*/
+#define GPIO_PIN_SET   1
+#define GPIO_PIN_RESET 0
+
+/*
+                                    GPIO_RETURN_STATE
+*/
+#define GPIO_RETURN_OK    0
+#define GPIO_RETURN_ERROR 1
+
 /******************************************************************************
                                       APIs
 ******************************************************************************/
-void MCAL_GPIO_init(GPIO_Typedef* GPIOx, GPIO_PinConfig_t* PinConfig);
-void MCAL_GPIO_term(GPIO_Typedef* GPIOx, GPIO_PinConfig_t* PinConfig);
+void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig);
+void MCAL_GPIO_term(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig);
+
+uint8_t MCAL_GPIO_read_pin(GPIO_Typedef *GPIOx, uint16_t Pin);
+void    MCAL_GPIO_write_pin(GPIO_Typedef *GPIOx, uint16_t Pin, uint8_t State);
+void    MCAL_GPIO_toggle_pin(GPIO_Typedef *GPIOx, uint16_t Pin);
+uint8_t MCAL_GPIO_lock_pin(GPIO_Typedef *GPIOx, uint16_t Pin);
+
+uint16_t MCAL_GPIO_read_port(GPIO_Typedef *GPIOx);
+void     MCAL_GPIO_write_port(GPIO_Typedef *GPIOx, uint16_t State);
+void     MCAL_GPIO_toggle_port(GPIO_Typedef *GPIOx);
 
 #endif /* ifndef STM32F103C6_GPIO_H_ */
