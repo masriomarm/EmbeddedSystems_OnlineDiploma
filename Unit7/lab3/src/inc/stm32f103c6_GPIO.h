@@ -43,22 +43,21 @@ typedef struct {
 /*
                                 GPIO_Mode_DEFINE
 */
-#define GPIO_MODE_Analgo    ((uint16_t)0x0000)
-#define GPIO_MODE_IN_HIZ    ((uint16_t)0x0001)
+#define GPIO_MODE_Analog    ((uint16_t)0x0000)
+#define GPIO_MODE_IN_Float  ((uint16_t)0x0001)
 #define GPIO_MODE_IN_PU     ((uint16_t)0x0002)
 #define GPIO_MODE_IN_PD     ((uint16_t)0x0003)
 #define GPIO_MODE_OUT_PP    ((uint16_t)0x0004)
 #define GPIO_MODE_OUT_OD    ((uint16_t)0x0005)
 #define GPIO_MODE_OUT_AF_PP ((uint16_t)0x0006)
 #define GPIO_MODE_OUT_AF_OD ((uint16_t)0x0007)
-#define GPIO_MODE_AF_IN     ((uint16_t)0x0008)
 
 /*
                                    GPIO_SPEED
 */
-#define GPIO_SPEED_2M  ((uint16_t)0x0001)
 #define GPIO_SPEED_10M ((uint16_t)0x0001)
-#define GPIO_SPEED_50M ((uint16_t)0x0001)
+#define GPIO_SPEED_2M  ((uint16_t)0x0002)
+#define GPIO_SPEED_50M ((uint16_t)0x0003)
 
 /*
                                  GPIO_PIN_STATE
@@ -67,7 +66,7 @@ typedef struct {
 #define GPIO_PIN_RESET 0
 
 /*
-                                    GPIO_RETURN_STATE
+                               GPIO_RETURN_STATE
 */
 #define GPIO_RETURN_OK    0
 #define GPIO_RETURN_ERROR 1

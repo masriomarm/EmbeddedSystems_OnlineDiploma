@@ -3,7 +3,7 @@ AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveMacros: AcrossComments
 AlignTrailingComments: true
 AllowShortBlocksOnASingleLine: Always
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 AllowShortEnumsOnASingleLine: true
 BitFieldColonSpacing: After
 AlignEscapedNewlines: Left
@@ -16,4 +16,6 @@ IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 2
 AlignAfterOpenBracket: Align
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
 ColumnLimit: 80
