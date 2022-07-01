@@ -9,9 +9,10 @@
 */
 
 typedef struct {
-  uint16_t GPIO_Pin;   /// @ref GPIO_PINS_DEFINE
-  uint16_t GPIO_Mode;  /// @ref GPIO_MODE_DEFINE
-  uint16_t GPIO_SPEED; /// @ref GPIO_SPEED_DEFINE
+  GPIO_Typedef *GPIO_Port;
+  uint16_t      GPIO_Pin;   /// @ref GPIO_PINS_DEFINE
+  uint16_t      GPIO_Mode;  /// @ref GPIO_MODE_DEFINE
+  uint16_t      GPIO_SPEED; /// @ref GPIO_SPEED_DEFINE
 
 } GPIO_PinConfig_t;
 
@@ -75,7 +76,7 @@ typedef struct {
                                       APIs
 ******************************************************************************/
 void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig);
-void MCAL_GPIO_term(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig);
+void MCAL_GPIO_term(GPIO_Typedef *GPIOx);
 
 uint8_t MCAL_GPIO_read_pin(GPIO_Typedef *GPIOx, uint16_t Pin);
 void    MCAL_GPIO_write_pin(GPIO_Typedef *GPIOx, uint16_t Pin, uint8_t State);
