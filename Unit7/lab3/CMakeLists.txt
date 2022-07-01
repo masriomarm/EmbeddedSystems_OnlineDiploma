@@ -12,6 +12,9 @@ add_executable(${PRJ_NAME} ${SRC_FILES})
 target_include_directories(${PRJ_NAME} PUBLIC src/inc/)
 
 set_target_properties(${PRJ_NAME} PROPERTIES OUTPUT_NAME "${PRJ_NAME}.elf")
+message(" compiler flags: ${CMAKE_C_FLAGS}")
+message(" linker flags: ${CMAKE_EXE_LINKER_FLAGS}")
+
 add_custom_target( Bin_Hex ALL
     DEPENDS ${PRJ_NAME}
     COMMAND cd ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} && ${CMAKE_OBJCOPY} "${PRJ_NAME}.elf" -O binary "${PRJ_NAME}.bin"
