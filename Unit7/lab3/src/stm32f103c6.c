@@ -6,7 +6,63 @@
  * \param [in] PinConfig, pointer to config structure.
  */
 
-void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
+uint8_t static config_pos(uint16_t pin)
+{
+  switch (pin)
+  {
+    case GPIO_Pin_0:
+      return 0;
+      break;
+    case GPIO_Pin_1:
+      return 4;
+      break;
+    case GPIO_Pin_2:
+      return 8;
+      break;
+    case GPIO_Pin_3:
+      return 12;
+      break;
+    case GPIO_Pin_4:
+      return 16;
+      break;
+    case GPIO_Pin_5:
+      return 20;
+      break;
+    case GPIO_Pin_6:
+      return 24;
+      break;
+    case GPIO_Pin_7:
+      return 28;
+      break;
+    case GPIO_Pin_8:
+      return 0;
+      break;
+    case GPIO_Pin_9:
+      return 4;
+      break;
+    case GPIO_Pin_10:
+      return 8;
+      break;
+    case GPIO_Pin_11:
+      return 12;
+      break;
+    case GPIO_Pin_12:
+      return 16;
+      break;
+    case GPIO_Pin_13:
+      return 20;
+      break;
+    case GPIO_Pin_14:
+      return 24;
+      break;
+    case GPIO_Pin_15:
+      return 28;
+      break;
+  }
+  return 29;
+}
+void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig)
+{
   uint16_t pin    = PinConfig->GPIO_Pin;
   uint16_t mode   = PinConfig->GPIO_Mode;
   uint16_t speed  = PinConfig->GPIO_SPEED;
@@ -14,24 +70,30 @@ void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
 
   uint32_t *configreg = NULL;
 
-  if (pin <= GPIO_Pin_7 && pin >= GPIO_Pin_0) { /// CRL
-    pinpos    = pin * 4;
+  if (pin <= GPIO_Pin_7 && pin >= GPIO_Pin_0)
+  { /// CRL
+    pinpos    = config_pos(pin);
     configreg = &GPIOx->CRL;
-  } else if (PinConfig->GPIO_Pin <= GPIO_Pin_15 &&
-             PinConfig->GPIO_Pin >= GPIO_Pin_8) { /// CRH
-    pinpos    = (pin - 8) * 4;
+  }
+  else if (PinConfig->GPIO_Pin <= GPIO_Pin_15 &&
+           PinConfig->GPIO_Pin >= GPIO_Pin_8)
+  { /// CRH
+    pinpos    = config_pos(pin);
     configreg = &GPIOx->CRH;
-  } else {
+  }
+  else
+  {
     return;
   }
 
   /// check pin direction
-  if (mode <= GPIO_MODE_IN_PD /* 3 */ &&
-      mode >= GPIO_MODE_Analog /* 0 */) { /// if input
+  if (mode <= GPIO_MODE_IN_PD /* 3 */ && mode >= GPIO_MODE_Analog /* 0 */)
+  { /// if input
     /// clear corresponding MODE in CRL
     (*configreg) &= ~(11 << (pinpos));
     /// write to corresponding CNF according to mode
-    switch (mode) {
+    switch (mode)
+    {
       case GPIO_MODE_Analog:
         (*configreg) &= ~(11 << (pinpos + 2));
         break;
@@ -52,9 +114,11 @@ void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
       default:
         break;
     }
-  } else if (mode <= GPIO_MODE_OUT_AF_OD &&
-             mode >= GPIO_MODE_OUT_PP) { /// if output
-    switch (speed) {                     /// write to CNF accordingly
+  }
+  else if (mode <= GPIO_MODE_OUT_AF_OD && mode >= GPIO_MODE_OUT_PP)
+  { /// if output
+    switch (speed)
+    { /// write to CNF accordingly
       case GPIO_SPEED_50M:
         (*configreg) |= (11 << pinpos);
         break;
@@ -69,7 +133,8 @@ void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
       default:
         break;
     }
-    switch (mode) { /// write to CNF accordingly
+    switch (mode)
+    { /// write to CNF accordingly
       case GPIO_MODE_OUT_AF_OD:
         (*configreg) |= (11 << (pinpos + 2));
         break;
@@ -87,7 +152,9 @@ void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
       default:
         break;
     }
-  } else {
+  }
+  else
+  {
     return;
   }
 }
@@ -98,32 +165,40 @@ void MCAL_GPIO_init(GPIO_Typedef *GPIOx, GPIO_PinConfig_t *PinConfig) {
  * \param [in] PinConfig, pointer to config structure.
  */
 
-void MCAL_GPIO_term(GPIO_Typedef *GPIOx) {
+void MCAL_GPIO_term(GPIO_Typedef *GPIOx)
+{
 
-  if (GPIOx == GPIOA) {
+  if (GPIOx == GPIOA)
+  {
     RCC->APB2RSTR |= (1 << 2);
     RCC->APB2RSTR &= ~(1 << 2);
   }
 
-  else if (GPIOx == GPIOB) {
+  else if (GPIOx == GPIOB)
+  {
     RCC->APB2RSTR |= (1 << 3);
     RCC->APB2RSTR &= ~(1 << 3);
   }
 
-  else if (GPIOx == GPIOC) {
+  else if (GPIOx == GPIOC)
+  {
     RCC->APB2RSTR |= (1 << 4);
     RCC->APB2RSTR &= ~(1 << 4);
   }
 
-  else if (GPIOx == GPIOD) {
+  else if (GPIOx == GPIOD)
+  {
     RCC->APB2RSTR |= (1 << 5);
     RCC->APB2RSTR &= ~(1 << 5);
   }
 
-  else if (GPIOx == GPIOE) {
+  else if (GPIOx == GPIOE)
+  {
     RCC->APB2RSTR |= (1 << 6);
     RCC->APB2RSTR &= ~(1 << 6);
-  } else {
+  }
+  else
+  {
     return;
   }
 }
@@ -135,7 +210,8 @@ void MCAL_GPIO_term(GPIO_Typedef *GPIOx) {
  * \retval Pin status @GPIO_PIN_STATE
  */
 
-uint8_t MCAL_GPIO_read_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
+uint8_t MCAL_GPIO_read_pin(GPIO_Typedef *GPIOx, uint16_t Pin)
+{
 
   return ((uint8_t)(GPIOx->IDR & Pin));
 }
@@ -146,7 +222,8 @@ uint8_t MCAL_GPIO_read_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
  * \retval GPIOx port value
  */
 
-uint16_t MCAL_GPIO_read_port(GPIO_Typedef *GPIOx) {
+uint16_t MCAL_GPIO_read_port(GPIO_Typedef *GPIOx)
+{
 
   return ((uint16_t)GPIOx->IDR);
 }
@@ -158,13 +235,19 @@ uint16_t MCAL_GPIO_read_port(GPIO_Typedef *GPIOx) {
  * \param [in] State,refer GPIO_PIN_STATE
  */
 
-void MCAL_GPIO_write_pin(GPIO_Typedef *GPIOx, uint16_t Pin, uint8_t State) {
+void MCAL_GPIO_write_pin(GPIO_Typedef *GPIOx, uint16_t Pin, uint8_t State)
+{
 
-  if (State == GPIO_PIN_SET) {
+  if (State == GPIO_PIN_SET)
+  {
     GPIOx->BSRR = (uint32_t)(Pin);
-  } else if (State == GPIO_PIN_RESET) {
+  }
+  else if (State == GPIO_PIN_RESET)
+  {
     GPIOx->BRR = (uint32_t)(Pin);
-  } else {
+  }
+  else
+  {
     return;
   }
 }
@@ -175,7 +258,8 @@ void MCAL_GPIO_write_pin(GPIO_Typedef *GPIOx, uint16_t Pin, uint8_t State) {
  * \param [in] State,refer GPIO_PIN_STATE
  */
 
-void MCAL_GPIO_write_port(GPIO_Typedef *GPIOx, uint16_t State) {
+void MCAL_GPIO_write_port(GPIO_Typedef *GPIOx, uint16_t State)
+{
   GPIOx->ODR = ((uint32_t)(State));
 }
 
@@ -185,7 +269,8 @@ void MCAL_GPIO_write_port(GPIO_Typedef *GPIOx, uint16_t State) {
  * \param [in] Pin, indicates pin number according to GPIO_PINS_DEFINE
  */
 
-void MCAL_GPIO_toggle_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
+void MCAL_GPIO_toggle_pin(GPIO_Typedef *GPIOx, uint16_t Pin)
+{
   GPIOx->ODR ^= ((uint32_t)(Pin));
 }
 
@@ -194,7 +279,8 @@ void MCAL_GPIO_toggle_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
  * \param [in] GPIOx, pointer to GPOIx_Typedef, where x indicates the port.
  */
 
-void MCAL_GPIO_toggle_port(GPIO_Typedef *GPIOx) {
+void MCAL_GPIO_toggle_port(GPIO_Typedef *GPIOx)
+{
   GPIOx->ODR ^= ((uint32_t)(0xFFFF));
 }
 
@@ -205,7 +291,8 @@ void MCAL_GPIO_toggle_port(GPIO_Typedef *GPIOx) {
  * \retval Status @GPIO_RETURN_STATE
  */
 
-uint8_t MCAL_GPIO_lock_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
+uint8_t MCAL_GPIO_lock_pin(GPIO_Typedef *GPIOx, uint16_t Pin)
+{
   uint8_t confirm = 0;
   GPIOx->LCKR |= (Pin);
 
@@ -213,14 +300,20 @@ uint8_t MCAL_GPIO_lock_pin(GPIO_Typedef *GPIOx, uint16_t Pin) {
   GPIOx->LCKR &= ~(1 << 16);
   GPIOx->LCKR |= (1 << 16);
 
-  if ((((GPIOx->LCKR)) & (1 << 16)) == 0) {
+  if ((((GPIOx->LCKR)) & (1 << 16)) == 0)
+  {
     confirm = 1;
-  } else {
+  }
+  else
+  {
     return GPIO_RETURN_ERROR;
   }
-  if (confirm && ((GPIOx->LCKR) & (1 << 16))) {
+  if (confirm && ((GPIOx->LCKR) & (1 << 16)))
+  {
     return GPIO_RETURN_OK;
-  } else {
+  }
+  else
+  {
     return GPIO_RETURN_ERROR;
   }
 
