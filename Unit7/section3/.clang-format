@@ -1,0 +1,27 @@
+BasedOnStyle: LLVM
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveMacros: AcrossComments
+AlignTrailingComments: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: true
+BitFieldColonSpacing: After
+AlignEscapedNewlines: Left
+AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
+AlignConsecutiveDeclarations: Consecutive
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+IncludeBlocks: Preserve
+IndentCaseLabels: true
+IndentPPDirectives: BeforeHash
+IndentWidth: 2
+AlignAfterOpenBracket: Align
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: Always
+  BeforeElse: true
+  AfterFunction: true
+  SplitEmptyFunction: true
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
+ColumnLimit: 80
