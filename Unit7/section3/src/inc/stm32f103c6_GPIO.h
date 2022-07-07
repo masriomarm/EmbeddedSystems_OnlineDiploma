@@ -63,8 +63,8 @@ typedef struct {
 /*
                                  GPIO_PIN_STATE
 */
-#define GPIO_PIN_SET   1
-#define GPIO_PIN_RESET 0
+#define GPIO_PIN_SET   ((uint8_t) 1)
+#define GPIO_PIN_RESET ((uint8_t) 0)
 
 /*
                                GPIO_RETURN_STATE

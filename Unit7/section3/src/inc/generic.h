@@ -1,8 +1,5 @@
-#include "avr/io.h"
-#include "avr/iom32.h"
-#include "util/delay.h"
+#include "stm32f103c6.h"
+#include "stm32f103c6_GPIO.h"
 
-#define SET_BIT(reg,bit)  ((reg) |= 1 << (bit))
-#define TGL_BIT(reg,bit)  ((reg) ^= 1 << (bit))
-#define CLR_BIT(reg,bit)  ((reg) &= ~(1 << (bit)))
-#define RDD_BIT(reg,bit)  ((reg) & (1 << (bit)))
+void _delay_ms(int);
+void _delay_us(int);
