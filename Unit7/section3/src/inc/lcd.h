@@ -1,10 +1,9 @@
 /*
  * lcd.h
  *
- * Created: 4/22/2021 3:01:25 PM
- *  Author: Marco
+ * Created: Sat  9 Jul 20:04:26 EET 2022
+ *  Author: Omar Elmasri
  */
-
 #ifndef LCD_H_
 #define LCD_H_
 
