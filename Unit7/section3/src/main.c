@@ -8,12 +8,15 @@
 #include "inc/generic.h"
 #include "inc/keypad.h"
 #include "inc/lcd.h"
+#include "inc/stm32f103c6.h"
 
 void init_GPIO(void);
 
 int main()
 {
 
+  CLK_EN_GPIOA;
+  CLK_EN_GPIOB;
   init_GPIO();
   init_LCD();
   Keypad_init();
