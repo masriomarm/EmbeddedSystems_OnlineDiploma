@@ -18,7 +18,7 @@ typedef struct {
   EXTI_GPIO_Mapping_t EXTI_Line;
   uint8_t             EXTI_TriggerEdge; /// refer to @EXTI_TriggerEdge_define
   uint8_t             IRQ_EN;           /// refer to @EXTI_IRQ_define
-  IRQ_CallBack        EXTI_CallBack;          /// pointer to IRQ_EXTI_handler callback
+  IRQ_CallBack        EXTI_CallBack;    /// pointer to IRQ_EXTI_handler callback
 
 } EXTI_PinConfig_t;
 
