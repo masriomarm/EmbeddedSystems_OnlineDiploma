@@ -5,7 +5,9 @@ this a tempelate file intended for C,Cpp files
 it utilize autocommand and temeplate files in
 author: Omar Elmasri
 */
-
+/// dummy delay function
+void _delay_ms(int);
+void _delay_us(int);
 /******************************************************************************
                                     Includes
 ******************************************************************************/
@@ -17,11 +19,18 @@ author: Omar Elmasri
                              Memory base addresses
 ******************************************************************************/
 
-#define FLASH_BASE              0x08000000
-#define SYSTEM_BASE             0x1FFFF000
-#define SRAM_BASE               0x20000000
-#define PERIPHERALS_BASE        0x40000000
+#define FLASH_BASE       0x08000000
+#define SYSTEM_BASE      0x1FFFF000
+#define SRAM_BASE        0x20000000
+#define PERIPHERALS_BASE 0x40000000
+
 #define CORTEX_M3_INTERNAL_BASE 0xE0000000
+
+#define NVIC_BASE  0xE000E100
+#define NVIC_ISER0 (*((volatile uint32_t *)(NVIC_BASE + 0x000)))
+#define NVIC_ISER1 (*((volatile uint32_t *)(NVIC_BASE + 0x004)))
+#define NVIC_ICER0 (*((volatile uint32_t *)(NVIC_BASE + 0x080)))
+#define NVIC_ICER1 (*((volatile uint32_t *)(NVIC_BASE + 0x084)))
 
 /******************************************************************************
                            Peripherals base addresses
@@ -33,17 +42,6 @@ author: Omar Elmasri
 
 #define RCC_BASE 0x40021000
 
-/// GPIOx
-#define GPIOA_BASE 0x40010800
-#define GPIOB_BASE 0x40010C00
-#define GPIOC_BASE 0x40011000
-#define GPIOD_BASE 0x40011400
-#define GPIOE_BASE 0x40011800
-/// EXTI
-#define EXTI_BASE  0x40010400
-/// AFIO
-#define AFIO_BASE  0x40010000
-
 /*
                                     APB1 BUS
 */
@@ -52,9 +50,27 @@ author: Omar Elmasri
                                     APB2 BUS
 */
 
+/// GPIOx
+#define GPIOA_BASE 0x40010800
+#define GPIOB_BASE 0x40010C00
+#define GPIOC_BASE 0x40011000
+#define GPIOD_BASE 0x40011400
+#define GPIOE_BASE 0x40011800
+
+/// EXTI
+#define EXTI_BASE 0x40010400
+/// AFIO
+#define AFIO_BASE 0x40010000
+
 /******************************************************************************
-                           Peripherals Registers typdef
+                         Peripherals Registers typedef
 ******************************************************************************/
+
+/*
+                              IRQ CallBack typedef
+*/
+
+typedef void(*IRQ_CallBack)(void);
 
 /*
                                  GPIOx Register
@@ -105,10 +121,7 @@ typedef struct {
 typedef struct {
   uint32_t EVCR;
   uint32_t MAPR;
-  uint32_t EXTICR1;
-  uint32_t EXTICR2;
-  uint32_t ECTICR3;
-  uint32_t EXTICR4;
+  uint32_t EXTICR[4];
   uint32_t offset_reserved0;
   uint32_t MAPR2;
 } AFIO_Typedef;
@@ -151,5 +164,46 @@ typedef struct {
 #define CLK_EN_GPIOE ((RCC)->APB2ENR |= 1 << 6)
 
 #define CLK_EN_AFIO ((RCC)->APB2ENR |= 1 << 0)
+
+/*
+                                      IVT
+*/
+// EXTI
+#define EXTI0_IRQ  6
+#define EXTI1_IRQ  7
+#define EXTI2_IRQ  8
+#define EXTI3_IRQ  9
+#define EXTI4_IRQ  10
+#define EXTI5_IRQ  23
+#define EXTI6_IRQ  23
+#define EXTI7_IRQ  23
+#define EXTI8_IRQ  23
+#define EXTI9_IRQ  23
+#define EXTI10_IRQ 40
+#define EXTI11_IRQ 40
+#define EXTI12_IRQ 40
+#define EXTI13_IRQ 40
+#define EXTI14_IRQ 40
+#define EXTI15_IRQ 40
+
+/*
+                         NVIC IRQ Enable/Disable macro
+*/
+
+#define NVIC_IRQ6_EXTI0_Enable      ((NVIC_ISER0) |= (1 << 6))
+#define NVIC_IRQ7_EXTI1_Enable      ((NVIC_ISER0) |= (1 << 7))
+#define NVIC_IRQ8_EXTI2_Enable      ((NVIC_ISER0) |= (1 << 8))
+#define NVIC_IRQ9_EXTI3_Enable      ((NVIC_ISER0) |= (1 << 9))
+#define NVIC_IRQ10_EXTI4_Enable     ((NVIC_ISER0) |= (1 << 10))
+#define NVIC_IRQ23_EXTI5_9_Enable   ((NVIC_ISER0) |= (1 << 23))
+#define NVIC_IRQ40_EXTI10_15_Enable ((NVIC_ISER1) |= (1 << 8))
+
+#define NVIC_IRQ6_EXTI0_Disable      ((NVIC_ICER0) |= (1 << 6))
+#define NVIC_IRQ7_EXTI1_Disable      ((NVIC_ICER0) |= (1 << 7))
+#define NVIC_IRQ8_EXTI2_Disable      ((NVIC_ICER0) |= (1 << 8))
+#define NVIC_IRQ9_EXTI3_Disable      ((NVIC_ICER0) |= (1 << 9))
+#define NVIC_IRQ10_EXTI4_Disable     ((NVIC_ICER0) |= (1 << 10))
+#define NVIC_IRQ23_EXTI5_9_Disable   ((NVIC_ICER0) |= (1 << 23))
+#define NVIC_IRQ40_EXTI10_15_Disable ((NVIC_ICER1) |= (1 << 8))
 
 #endif /* ifndef STM32F103C6_H_ */
