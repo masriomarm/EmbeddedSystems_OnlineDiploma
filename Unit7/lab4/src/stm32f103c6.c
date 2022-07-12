@@ -554,6 +554,7 @@ void MCAL_EXTI_GPIO_DeInit(void)
 
 void MCAL_EXTI_GPIO_Init(EXTI_PinConfig_t *EXTI_Config)
 {
+  MCAL_EXTI_GPIO_Update(EXTI_Config);
 }
 
 /**
