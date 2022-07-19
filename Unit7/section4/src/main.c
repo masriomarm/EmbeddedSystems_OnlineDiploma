@@ -5,38 +5,36 @@
  * Author : Marco
  */
 
-#include "inc/lcd.h"
 #include "inc/keypad.h"
+#include "inc/lcd.h"
+#include "string.h"
 
 void init_GPIO(void);
 
-int main()
-{
+int main() {
 
   init_GPIO();
   init_LCD();
   Keypad_init();
-  char flag = 1;
-  char key;
-  while (1) {
-    key = Keypad_getkey();
-    switch (key) {
-      case 'A': break;
-      case '?': LCD_cmd(LCD_CMD_DISP_CLR); break;
-      default: LCD_disp(key); break;
-    }
-    if(key == '5' && flag){
-      LCD_cmd(0x18);
-      LCD_cmd(0x18);
-      LCD_cmd(0x18);
-      flag = 0;
-    }
-  }
+  LCD_print("Omar Elmasri",strlen("Omar Elmasri"));
+  LCD_cmd(LCD_CMD_CURS_LINE_2);
+  char *temp = "Learn in depth";
+  LCD_print(temp, strlen(temp));
+
+    /*char key;*/
+  /*while (1) {*/
+  /*key = Keypad_getkey();*/
+  /*switch (key) {*/
+  /*case 'A': break;*/
+  /*case '*': LCD_cmd(LCD_CMD_DISP_CLR); break;*/
+  /*default: LCD_disp(key); break;*/
+  /*}*/
+  /*}*/
   return 0;
 }
 
 void init_GPIO(void) {
   DDRA = 0xFF;
-  DDRB |= (0b111 << 0);
+  DDRB = 0xFF;
   DDRD = 0x00;
 }

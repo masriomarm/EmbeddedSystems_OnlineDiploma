@@ -6,7 +6,7 @@ target:
 	mkdir build/ || cd build/
 	mkdir debug/ || cd debug/
 	cd build/ && cmake -DCMAKE_TOOLCHAIN_FILE=../TC-avr.cmake -G "Unix Makefiles" ../
-	cd build && make VERBOSE=1
+	cd build && make -s
 	@echo "build successfull... Alhamdulillah"
 
 rebuild:
