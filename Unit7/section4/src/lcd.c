@@ -60,10 +60,10 @@ void LCD_print(char *str, uint8_t len) {
     if (NULL == str) {
       break;
     }
-    if (len >=16){
-    LCD_disp(*str++);
+    if (len >= 16) {
+      LCD_disp(*str++);
     }
-    if (len <16){
+    if (len < 16) {
       LCD_disp_char(*str++);
     }
   }
