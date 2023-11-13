@@ -23,5 +23,4 @@ BraceWrapping:
   AfterFunction: true
   SplitEmptyFunction: true
 AlignOperands: AlignAfterOperator
-AlignTrailingComments: true
 ColumnLimit: 80
